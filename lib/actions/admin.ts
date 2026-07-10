@@ -8,6 +8,7 @@ import {
   unitFormSchema,
   lessonFormSchema,
   vocabularyFormSchema,
+  lessonExampleFormSchema,
   questionFormSchema,
 } from "@/lib/validations/admin";
 import type { ActionResult } from "@/lib/actions/auth";
@@ -176,6 +177,41 @@ export async function deleteVocabularyAction(id: string): Promise<ActionResult> 
     if (error) throw error;
     revalidateAdminPaths();
     return { success: true, message: "Kosakata berhasil dihapus." };
+  } catch (error) {
+    return { success: false, message: toFriendlyErrorMessage(error) };
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Lesson examples
+// ---------------------------------------------------------------------------
+export async function upsertLessonExampleAction(id: string | null, input: unknown): Promise<ActionResult> {
+  const parsed = lessonExampleFormSchema.safeParse(input);
+  if (!parsed.success) {
+    return { success: false, message: parsed.error.issues[0]?.message ?? "Data tidak valid." };
+  }
+
+  try {
+    const supabase = await requireAdminClient();
+    const { error } = id
+      ? await supabase.from("lesson_examples").update(parsed.data).eq("id", id)
+      : await supabase.from("lesson_examples").insert(parsed.data);
+
+    if (error) throw error;
+    revalidateAdminPaths();
+    return { success: true, message: "Contoh kalimat berhasil disimpan." };
+  } catch (error) {
+    return { success: false, message: toFriendlyErrorMessage(error) };
+  }
+}
+
+export async function deleteLessonExampleAction(id: string): Promise<ActionResult> {
+  try {
+    const supabase = await requireAdminClient();
+    const { error } = await supabase.from("lesson_examples").delete().eq("id", id);
+    if (error) throw error;
+    revalidateAdminPaths();
+    return { success: true, message: "Contoh kalimat berhasil dihapus." };
   } catch (error) {
     return { success: false, message: toFriendlyErrorMessage(error) };
   }
