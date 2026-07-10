@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { OfflineBanner } from "@/components/common/offline-banner";
 import { siteConfig } from "@/lib/constants/site";
 import "./globals.css";
 
@@ -65,6 +66,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col overflow-x-clip bg-background text-foreground">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <OfflineBanner />
           {children}
           <Toaster position="top-center" richColors closeButton />
         </ThemeProvider>
