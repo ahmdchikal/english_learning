@@ -27,14 +27,17 @@ export default async function ProfilePage() {
 
       <div className="grid gap-6 sm:grid-cols-[auto_1fr]">
         <div className="flex justify-center sm:justify-start">
-          <AvatarUpload avatarUrl={profile?.avatar_url ?? null} fullName={profile?.full_name || user.email || "Pengguna"} />
+          <AvatarUpload
+            avatarUrl={profile?.avatar_url ?? null}
+            fullName={profile?.full_name || user.email || "Pengguna"}
+          />
         </div>
 
         <div className="space-y-6">
-          <div className="rounded-2xl border bg-card p-5 shadow-sm sm:p-6">
+          <div className="bg-card rounded-2xl border p-5 shadow-sm sm:p-6">
             <h2 className="font-semibold">Informasi Akun</h2>
-            <p className="mt-1 text-sm text-muted-foreground">{user.email}</p>
-            <p className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground">
+            <p className="text-muted-foreground mt-1 text-sm">{user.email}</p>
+            <p className="text-muted-foreground mt-1 flex items-center gap-1.5 text-xs">
               <Calendar className="size-3.5" />
               Bergabung sejak {profile ? formatDate(profile.created_at) : "-"}
             </p>
@@ -45,33 +48,36 @@ export default async function ProfilePage() {
                   <Sparkles className="size-4" />
                   {formatXp(profile?.total_xp ?? 0)}
                 </p>
-                <p className="text-xs text-muted-foreground">Total XP</p>
+                <p className="text-muted-foreground text-xs">Total XP</p>
               </div>
               <div className="rounded-xl bg-orange-50 p-3 dark:bg-orange-500/10">
                 <p className="flex items-center justify-center gap-1 font-bold text-orange-700 dark:text-orange-300">
                   <Flame className="size-4" />
                   {profile?.current_streak ?? 0}
                 </p>
-                <p className="text-xs text-muted-foreground">Streak</p>
+                <p className="text-muted-foreground text-xs">Streak</p>
               </div>
               <div className="rounded-xl bg-amber-50 p-3 dark:bg-amber-500/10">
                 <p className="flex items-center justify-center gap-1 font-bold text-amber-700 dark:text-amber-300">
                   <Trophy className="size-4" />
                   {profile?.longest_streak ?? 0}
                 </p>
-                <p className="text-xs text-muted-foreground">Streak Terpanjang</p>
+                <p className="text-muted-foreground text-xs">Streak Terpanjang</p>
               </div>
             </div>
           </div>
 
-          <div className="rounded-2xl border bg-card p-5 shadow-sm sm:p-6">
+          <div className="bg-card rounded-2xl border p-5 shadow-sm sm:p-6">
             <h2 className="mb-4 font-semibold">Ubah Informasi</h2>
-            <ProfileForm fullName={profile?.full_name ?? ""} dailyGoalMinutes={profile?.daily_goal_minutes ?? 15} />
+            <ProfileForm
+              fullName={profile?.full_name ?? ""}
+              dailyGoalMinutes={profile?.daily_goal_minutes ?? 15}
+            />
           </div>
 
-          <div className="rounded-2xl border border-destructive/30 bg-destructive/5 p-5 shadow-sm sm:p-6">
-            <h2 className="font-semibold text-destructive">Zona Berbahaya</h2>
-            <p className="mt-1 text-sm text-muted-foreground">
+          <div className="border-destructive/30 bg-destructive/5 rounded-2xl border p-5 shadow-sm sm:p-6">
+            <h2 className="text-destructive font-semibold">Zona Berbahaya</h2>
+            <p className="text-muted-foreground mt-1 text-sm">
               Menghapus akun akan menghilangkan seluruh data Anda secara permanen.
             </p>
             <div className="mt-3">

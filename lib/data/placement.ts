@@ -19,11 +19,16 @@ export async function getPlacementTestQuestions(): Promise<PlacementQuestion[]> 
   const { data: optionsData } = await supabase
     .from("question_options")
     .select("*")
-    .in("question_id", questions.map((q) => q.id));
+    .in(
+      "question_id",
+      questions.map((q) => q.id)
+    );
   const options = (optionsData as QuestionOption[]) ?? [];
 
   return questions.map((question) => ({
     ...question,
-    options: options.filter((o) => o.question_id === question.id).sort((a, b) => a.order_index - b.order_index),
+    options: options
+      .filter((o) => o.question_id === question.id)
+      .sort((a, b) => a.order_index - b.order_index),
   }));
 }

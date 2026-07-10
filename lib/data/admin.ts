@@ -1,6 +1,14 @@
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import type { Level, Lesson, LessonExample, Question, QuestionOption, Unit, Vocabulary } from "@/types/database";
+import type {
+  Level,
+  Lesson,
+  LessonExample,
+  Question,
+  QuestionOption,
+  Unit,
+  Vocabulary,
+} from "@/types/database";
 
 export interface AdminOverviewStats {
   totalUsers: number;
@@ -17,16 +25,23 @@ export interface AdminOverviewStats {
 export async function getAdminOverviewStats(): Promise<AdminOverviewStats> {
   const supabase = await createClient();
 
-  const [profilesCount, adminsCount, levelsCount, unitsCount, lessonsRes, questionsCount, attemptsCount] =
-    await Promise.all([
-      supabase.from("profiles").select("*", { count: "exact", head: true }),
-      supabase.from("profiles").select("*", { count: "exact", head: true }).eq("role", "admin"),
-      supabase.from("levels").select("*", { count: "exact", head: true }),
-      supabase.from("units").select("*", { count: "exact", head: true }),
-      supabase.from("lessons").select("is_published"),
-      supabase.from("questions").select("*", { count: "exact", head: true }),
-      supabase.from("quiz_attempts").select("*", { count: "exact", head: true }),
-    ]);
+  const [
+    profilesCount,
+    adminsCount,
+    levelsCount,
+    unitsCount,
+    lessonsRes,
+    questionsCount,
+    attemptsCount,
+  ] = await Promise.all([
+    supabase.from("profiles").select("*", { count: "exact", head: true }),
+    supabase.from("profiles").select("*", { count: "exact", head: true }).eq("role", "admin"),
+    supabase.from("levels").select("*", { count: "exact", head: true }),
+    supabase.from("units").select("*", { count: "exact", head: true }),
+    supabase.from("lessons").select("is_published"),
+    supabase.from("questions").select("*", { count: "exact", head: true }),
+    supabase.from("quiz_attempts").select("*", { count: "exact", head: true }),
+  ]);
 
   const lessons = (lessonsRes.data as Pick<Lesson, "is_published">[]) ?? [];
 
@@ -45,11 +60,16 @@ export async function getAdminOverviewStats(): Promise<AdminOverviewStats> {
 
 export async function getAllLevels(): Promise<Level[]> {
   const supabase = await createClient();
-  const { data } = await supabase.from("levels").select("*").order("order_index", { ascending: true });
+  const { data } = await supabase
+    .from("levels")
+    .select("*")
+    .order("order_index", { ascending: true });
   return (data as Level[]) ?? [];
 }
 
-export async function getAllUnits(): Promise<(Unit & { level: Pick<Level, "id" | "title" | "cefr_code"> })[]> {
+export async function getAllUnits(): Promise<
+  (Unit & { level: Pick<Level, "id" | "title" | "cefr_code"> })[]
+> {
   const supabase = await createClient();
   const { data } = await supabase
     .from("units")
@@ -81,12 +101,17 @@ export async function getAllQuestions(): Promise<
   const { data: optionsData } = await supabase
     .from("question_options")
     .select("*")
-    .in("question_id", questions.map((q) => q.id));
+    .in(
+      "question_id",
+      questions.map((q) => q.id)
+    );
   const options = (optionsData as QuestionOption[]) ?? [];
 
   return questions.map((q) => ({
     ...q,
-    options: options.filter((o) => o.question_id === q.id).sort((a, b) => a.order_index - b.order_index),
+    options: options
+      .filter((o) => o.question_id === q.id)
+      .sort((a, b) => a.order_index - b.order_index),
   }));
 }
 
@@ -104,9 +129,21 @@ export async function getAdminLessonDetail(lessonId: string): Promise<AdminLesso
   if (!lesson) return null;
 
   const [{ data: vocabulary }, { data: examples }, { data: questions }] = await Promise.all([
-    supabase.from("vocabulary").select("*").eq("lesson_id", lessonId).order("order_index", { ascending: true }),
-    supabase.from("lesson_examples").select("*").eq("lesson_id", lessonId).order("order_index", { ascending: true }),
-    supabase.from("questions").select("*").eq("lesson_id", lessonId).order("order_index", { ascending: true }),
+    supabase
+      .from("vocabulary")
+      .select("*")
+      .eq("lesson_id", lessonId)
+      .order("order_index", { ascending: true }),
+    supabase
+      .from("lesson_examples")
+      .select("*")
+      .eq("lesson_id", lessonId)
+      .order("order_index", { ascending: true }),
+    supabase
+      .from("questions")
+      .select("*")
+      .eq("lesson_id", lessonId)
+      .order("order_index", { ascending: true }),
   ]);
 
   const questionRows = (questions as Question[]) ?? [];
@@ -115,7 +152,10 @@ export async function getAdminLessonDetail(lessonId: string): Promise<AdminLesso
     const { data: optionsData } = await supabase
       .from("question_options")
       .select("*")
-      .in("question_id", questionRows.map((q) => q.id));
+      .in(
+        "question_id",
+        questionRows.map((q) => q.id)
+      );
     options = (optionsData as QuestionOption[]) ?? [];
   }
 
@@ -125,7 +165,9 @@ export async function getAdminLessonDetail(lessonId: string): Promise<AdminLesso
     examples: (examples as LessonExample[]) ?? [],
     questions: questionRows.map((q) => ({
       ...q,
-      options: options.filter((o) => o.question_id === q.id).sort((a, b) => a.order_index - b.order_index),
+      options: options
+        .filter((o) => o.question_id === q.id)
+        .sort((a, b) => a.order_index - b.order_index),
     })),
   };
 }

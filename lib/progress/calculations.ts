@@ -25,7 +25,9 @@ export function calculateLevelCompletion(
 ): number {
   const allLessons = units.flatMap((unit) => lessonsByUnit[unit.id] ?? []);
   if (allLessons.length === 0) return 0;
-  const completed = allLessons.filter((lesson) => progress[lesson.id]?.status === "completed").length;
+  const completed = allLessons.filter(
+    (lesson) => progress[lesson.id]?.status === "completed"
+  ).length;
   return Math.round((completed / allLessons.length) * 100);
 }
 

@@ -44,9 +44,21 @@ export async function getLessonDetail(lessonId: string): Promise<LessonDetail | 
   const level = unit.level;
 
   const [vocabRes, examplesRes, questionsRes, siblingLessonsRes, userRes] = await Promise.all([
-    supabase.from("vocabulary").select("*").eq("lesson_id", lessonId).order("order_index", { ascending: true }),
-    supabase.from("lesson_examples").select("*").eq("lesson_id", lessonId).order("order_index", { ascending: true }),
-    supabase.from("questions").select("*").eq("lesson_id", lessonId).order("order_index", { ascending: true }),
+    supabase
+      .from("vocabulary")
+      .select("*")
+      .eq("lesson_id", lessonId)
+      .order("order_index", { ascending: true }),
+    supabase
+      .from("lesson_examples")
+      .select("*")
+      .eq("lesson_id", lessonId)
+      .order("order_index", { ascending: true }),
+    supabase
+      .from("questions")
+      .select("*")
+      .eq("lesson_id", lessonId)
+      .order("order_index", { ascending: true }),
     supabase
       .from("lessons")
       .select("id, order_index")
@@ -62,7 +74,10 @@ export async function getLessonDetail(lessonId: string): Promise<LessonDetail | 
     const { data: optionsData } = await supabase
       .from("question_options")
       .select("*")
-      .in("question_id", questions.map((q) => q.id));
+      .in(
+        "question_id",
+        questions.map((q) => q.id)
+      );
     for (const option of (optionsData as QuestionOption[]) ?? []) {
       const list = optionsByQuestion.get(option.question_id) ?? [];
       list.push(option);
@@ -79,14 +94,21 @@ export async function getLessonDetail(lessonId: string): Promise<LessonDetail | 
   const currentIndex = siblingLessons.findIndex((l) => l.id === lessonId);
   const previousLessonId = currentIndex > 0 ? siblingLessons[currentIndex - 1].id : null;
   const nextLessonId =
-    currentIndex >= 0 && currentIndex < siblingLessons.length - 1 ? siblingLessons[currentIndex + 1].id : null;
+    currentIndex >= 0 && currentIndex < siblingLessons.length - 1
+      ? siblingLessons[currentIndex + 1].id
+      : null;
 
   let progress: UserLessonProgress | null = null;
   let unlocked = false;
 
   if (userRes.data.user) {
     const [{ data: progressData }, { data: unlockedData }] = await Promise.all([
-      supabase.from("user_lesson_progress").select("*").eq("user_id", userRes.data.user.id).eq("lesson_id", lessonId).maybeSingle(),
+      supabase
+        .from("user_lesson_progress")
+        .select("*")
+        .eq("user_id", userRes.data.user.id)
+        .eq("lesson_id", lessonId)
+        .maybeSingle(),
       supabase.rpc("is_lesson_unlocked", { p_lesson_id: lessonId }),
     ]);
     progress = (progressData as UserLessonProgress) ?? null;

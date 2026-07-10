@@ -37,7 +37,7 @@ export default async function LearnPage() {
             const content = (
               <div
                 className={cn(
-                  "flex h-full flex-col gap-3 rounded-2xl border bg-card p-5 shadow-sm transition-shadow",
+                  "bg-card flex h-full flex-col gap-3 rounded-2xl border p-5 shadow-sm transition-shadow",
                   level.unlocked ? "hover:shadow-md" : "opacity-70"
                 )}
               >
@@ -48,31 +48,34 @@ export default async function LearnPage() {
                     </span>
                     <div>
                       <h2 className="font-semibold">{level.title}</h2>
-                      <p className="text-xs text-muted-foreground">{level.totalLessons} pelajaran</p>
+                      <p className="text-muted-foreground text-xs">
+                        {level.totalLessons} pelajaran
+                      </p>
                     </div>
                   </div>
                   {level.unlocked ? (
                     level.progressPercent === 100 ? (
                       <CheckCircle2 className="size-5 text-emerald-500" />
                     ) : (
-                      <ChevronRight className="size-5 text-muted-foreground" />
+                      <ChevronRight className="text-muted-foreground size-5" />
                     )
                   ) : (
-                    <Lock className="size-5 text-muted-foreground" />
+                    <Lock className="text-muted-foreground size-5" />
                   )}
                 </div>
-                <p className="text-sm text-muted-foreground">{level.description}</p>
+                <p className="text-muted-foreground text-sm">{level.description}</p>
                 {level.unlocked && level.totalLessons > 0 && (
                   <div>
                     <Progress value={level.progressPercent} indicatorClassName="bg-emerald-500" />
-                    <p className="mt-1 text-xs text-muted-foreground">
+                    <p className="text-muted-foreground mt-1 text-xs">
                       {level.completedLessons}/{level.totalLessons} pelajaran selesai
                     </p>
                   </div>
                 )}
                 {!level.unlocked && (
-                  <p className="text-xs font-medium text-muted-foreground">
-                    Selesaikan 80% level sebelumnya dengan skor rata-rata 70 untuk membuka level ini.
+                  <p className="text-muted-foreground text-xs font-medium">
+                    Selesaikan 80% level sebelumnya dengan skor rata-rata 70 untuk membuka level
+                    ini.
                   </p>
                 )}
               </div>

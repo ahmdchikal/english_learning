@@ -1,10 +1,24 @@
 "use client";
 
-import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import {
+  Area,
+  AreaChart,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 import { formatShortDate, lastNDays } from "@/lib/utils/format";
 import type { DailyActivity } from "@/types/database";
 
-export function StudyTimeChart({ activities, days = 7 }: { activities: DailyActivity[]; days?: number }) {
+export function StudyTimeChart({
+  activities,
+  days = 7,
+}: {
+  activities: DailyActivity[];
+  days?: number;
+}) {
   const dateList = lastNDays(days);
   const byDate = new Map(activities.map((a) => [a.activity_date, a]));
 
@@ -30,7 +44,13 @@ export function StudyTimeChart({ activities, days = 7 }: { activities: DailyActi
             formatter={(value) => [`${value} menit`, "Waktu belajar"]}
             contentStyle={{ borderRadius: 12, border: "1px solid var(--border)", fontSize: 12 }}
           />
-          <Area type="monotone" dataKey="minutes" stroke="#22c55e" fill="url(#studyTimeGradient)" strokeWidth={2} />
+          <Area
+            type="monotone"
+            dataKey="minutes"
+            stroke="#22c55e"
+            fill="url(#studyTimeGradient)"
+            strokeWidth={2}
+          />
         </AreaChart>
       </ResponsiveContainer>
     </div>

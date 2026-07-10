@@ -23,17 +23,17 @@ const FOOTER_LINKS: { title: string; links: { href: string; label: string }[] }[
 
 export function MarketingFooter() {
   return (
-    <footer className="border-t bg-muted/30">
+    <footer className="bg-muted/30 border-t">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
           <div className="col-span-1 sm:col-span-2 md:col-span-2">
-            <Link href="/" className="flex items-center gap-2 font-bold text-lg">
+            <Link href="/" className="flex items-center gap-2 text-lg font-bold">
               <span className="flex size-8 items-center justify-center rounded-xl bg-indigo-600 text-white">
                 <GraduationCap className="size-5" />
               </span>
               {siteConfig.name}
             </Link>
-            <p className="mt-3 max-w-sm text-sm text-muted-foreground">{siteConfig.description}</p>
+            <p className="text-muted-foreground mt-3 max-w-sm text-sm">{siteConfig.description}</p>
           </div>
 
           {FOOTER_LINKS.map((section) => (
@@ -44,7 +44,7 @@ export function MarketingFooter() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      className="text-muted-foreground hover:text-foreground text-sm transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -55,7 +55,7 @@ export function MarketingFooter() {
           ))}
         </div>
 
-        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t pt-6 text-sm text-muted-foreground sm:flex-row">
+        <div className="text-muted-foreground mt-10 flex flex-col items-center justify-between gap-4 border-t pt-6 text-sm sm:flex-row">
           <p>
             &copy; {new Date().getFullYear()} {siteConfig.name}. Seluruh hak cipta dilindungi.
           </p>

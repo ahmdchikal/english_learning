@@ -38,7 +38,7 @@ export function Faq() {
     <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24">
       <div className="text-center">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Pertanyaan Umum</h2>
-        <p className="mt-3 text-muted-foreground">
+        <p className="text-muted-foreground mt-3">
           Masih ada pertanyaan? Berikut jawaban untuk pertanyaan yang paling sering diajukan.
         </p>
       </div>

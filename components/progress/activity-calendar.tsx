@@ -2,7 +2,13 @@ import { cn } from "@/lib/utils";
 import { lastNDays } from "@/lib/utils/format";
 import type { DailyActivity } from "@/types/database";
 
-export function ActivityCalendar({ activities, days = 28 }: { activities: DailyActivity[]; days?: number }) {
+export function ActivityCalendar({
+  activities,
+  days = 28,
+}: {
+  activities: DailyActivity[];
+  days?: number;
+}) {
   const dateList = lastNDays(days);
   const byDate = new Map(activities.map((a) => [a.activity_date, a]));
 

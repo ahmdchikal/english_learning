@@ -19,7 +19,7 @@ export default async function PlacementTestPage() {
     <PageContainer className="max-w-2xl">
       <div className="mb-6 text-center">
         <h1 className="text-2xl font-bold tracking-tight">Tes Penempatan</h1>
-        <p className="mx-auto mt-2 max-w-lg text-muted-foreground">
+        <p className="text-muted-foreground mx-auto mt-2 max-w-lg">
           Tes ini bersifat opsional dan terdiri dari {questions.length || 20} soal dengan berbagai
           tingkat kesulitan. Hasilnya hanya berupa rekomendasi awal — Anda tetap dapat memulai dari
           level Pre-A1 kapan saja.

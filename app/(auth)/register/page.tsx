@@ -12,25 +12,28 @@ export const metadata: Metadata = {
 
 export default function RegisterPage() {
   return (
-    <div className="space-y-6 rounded-2xl border bg-card p-6 shadow-sm sm:p-8">
+    <div className="bg-card space-y-6 rounded-2xl border p-6 shadow-sm sm:p-8">
       <div className="space-y-1 text-center">
         <h1 className="text-2xl font-bold tracking-tight">Buat Akun Baru</h1>
-        <p className="text-sm text-muted-foreground">Mulai belajar Bahasa Inggris secara gratis</p>
+        <p className="text-muted-foreground text-sm">Mulai belajar Bahasa Inggris secara gratis</p>
       </div>
 
       <RegisterForm />
 
       <div className="flex items-center gap-3">
         <Separator className="flex-1" />
-        <span className="text-xs text-muted-foreground">atau</span>
+        <span className="text-muted-foreground text-xs">atau</span>
         <Separator className="flex-1" />
       </div>
 
       <GoogleAuthButton />
 
-      <p className="text-center text-sm text-muted-foreground">
+      <p className="text-muted-foreground text-center text-sm">
         Sudah punya akun?{" "}
-        <Link href="/login" className="font-medium text-indigo-600 hover:underline dark:text-indigo-400">
+        <Link
+          href="/login"
+          className="font-medium text-indigo-600 hover:underline dark:text-indigo-400"
+        >
           Masuk
         </Link>
       </p>

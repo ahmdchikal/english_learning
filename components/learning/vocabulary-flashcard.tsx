@@ -23,7 +23,7 @@ export function VocabularyFlashcard({ item }: { item: VocabularyWithLesson }) {
         {!flipped ? (
           <div>
             <p className="text-lg font-semibold">{item.english_word}</p>
-            {item.phonetic && <p className="text-xs text-muted-foreground">/{item.phonetic}/</p>}
+            {item.phonetic && <p className="text-muted-foreground text-xs">/{item.phonetic}/</p>}
           </div>
         ) : (
           <p className="text-lg font-semibold text-indigo-700 dark:text-indigo-300">
@@ -34,8 +34,8 @@ export function VocabularyFlashcard({ item }: { item: VocabularyWithLesson }) {
           <PronunciationButton text={item.english_word} size="icon-sm" />
         </div>
       </div>
-      {item.lesson && <p className="mt-2 text-xs text-muted-foreground">{item.lesson.title}</p>}
-      <div className="mt-2 flex items-center gap-1 self-end text-xs text-muted-foreground">
+      {item.lesson && <p className="text-muted-foreground mt-2 text-xs">{item.lesson.title}</p>}
+      <div className="text-muted-foreground mt-2 flex items-center gap-1 self-end text-xs">
         <RotateCw className="size-3" />
         Klik untuk membalik
       </div>

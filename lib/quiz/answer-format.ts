@@ -13,7 +13,10 @@ function getMatchingRightSide(correctAnswer: string): string {
   return correctAnswer.split("=").slice(1).join("=") ?? "";
 }
 
-export function buildSubmissionValue(question: Pick<Question, "type" | "correct_answer">, rawValue: string): string {
+export function buildSubmissionValue(
+  question: Pick<Question, "type" | "correct_answer">,
+  rawValue: string
+): string {
   if (question.type === "matching") {
     return `${getMatchingLeftSide(question.correct_answer)}=${rawValue.trim()}`;
   }
@@ -24,7 +27,10 @@ function normalize(value: string): string {
   return value.trim().toLowerCase();
 }
 
-export function isAnswerCorrect(question: Pick<Question, "type" | "correct_answer">, rawValue: string): boolean {
+export function isAnswerCorrect(
+  question: Pick<Question, "type" | "correct_answer">,
+  rawValue: string
+): boolean {
   if (!rawValue) return false;
 
   if (question.type === "matching") {

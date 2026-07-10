@@ -3,7 +3,7 @@ import { Progress } from "@/components/ui/progress";
 export function QuizProgressBar({ current, total }: { current: number; total: number }) {
   return (
     <div className="mb-6">
-      <div className="mb-2 flex items-center justify-between text-sm text-muted-foreground">
+      <div className="text-muted-foreground mb-2 flex items-center justify-between text-sm">
         <span>
           Soal {current} dari {total}
         </span>

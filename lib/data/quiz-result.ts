@@ -14,7 +14,10 @@ export interface QuizResultData {
   nextLessonId: string | null;
 }
 
-export async function getLatestQuizResult(lessonId: string, userId: string): Promise<QuizResultData | null> {
+export async function getLatestQuizResult(
+  lessonId: string,
+  userId: string
+): Promise<QuizResultData | null> {
   const supabase = await createClient();
 
   const { data: attemptData } = await supabase
@@ -53,7 +56,8 @@ export async function getLatestQuizResult(lessonId: string, userId: string): Pro
 
   const siblings = (siblingLessons as Pick<Lesson, "id" | "order_index">[]) ?? [];
   const currentIndex = siblings.findIndex((l) => l.id === lessonId);
-  const nextLessonId = currentIndex >= 0 && currentIndex < siblings.length - 1 ? siblings[currentIndex + 1].id : null;
+  const nextLessonId =
+    currentIndex >= 0 && currentIndex < siblings.length - 1 ? siblings[currentIndex + 1].id : null;
 
   return {
     attempt,

@@ -8,7 +8,14 @@ import { Pencil, Plus, Trash2, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { FormDialog } from "@/components/admin/form-dialog";
 import { LessonForm } from "@/components/admin/lesson-form";
 import { ConfirmDialog } from "@/components/common/confirm-dialog";
@@ -26,13 +33,15 @@ export function LessonsTable({
   const refresh = () => router.refresh();
   const [search, setSearch] = useState("");
 
-  const filtered = lessons.filter((lesson) => lesson.title.toLowerCase().includes(search.toLowerCase()));
+  const filtered = lessons.filter((lesson) =>
+    lesson.title.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <div className="relative w-full max-w-xs">
-          <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+          <Search className="text-muted-foreground absolute top-1/2 left-3 size-4 -translate-y-1/2" />
           <Input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -40,8 +49,24 @@ export function LessonsTable({
             className="pl-9"
           />
         </div>
-        <FormDialog trigger={<Button><Plus className="size-4" />Tambah Pelajaran</Button>} title="Tambah Pelajaran Baru">
-          {(close) => <LessonForm units={units} onSuccess={() => { close(); refresh(); }} />}
+        <FormDialog
+          trigger={
+            <Button>
+              <Plus className="size-4" />
+              Tambah Pelajaran
+            </Button>
+          }
+          title="Tambah Pelajaran Baru"
+        >
+          {(close) => (
+            <LessonForm
+              units={units}
+              onSuccess={() => {
+                close();
+                refresh();
+              }}
+            />
+          )}
         </FormDialog>
       </div>
 
@@ -89,13 +114,20 @@ export function LessonsTable({
                       title="Edit Pelajaran"
                     >
                       {(close) => (
-                        <LessonForm lesson={lesson} units={units} onSuccess={() => { close(); refresh(); }} />
+                        <LessonForm
+                          lesson={lesson}
+                          units={units}
+                          onSuccess={() => {
+                            close();
+                            refresh();
+                          }}
+                        />
                       )}
                     </FormDialog>
                     <ConfirmDialog
                       trigger={
                         <Button size="icon-sm" variant="ghost">
-                          <Trash2 className="size-4 text-destructive" />
+                          <Trash2 className="text-destructive size-4" />
                         </Button>
                       }
                       title={`Hapus pelajaran "${lesson.title}"?`}

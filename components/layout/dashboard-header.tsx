@@ -5,9 +5,15 @@ import { UserMenu } from "@/components/layout/user-menu";
 import { siteConfig } from "@/lib/constants/site";
 import type { Profile } from "@/types/database";
 
-export function DashboardHeader({ profile, email }: { profile: Profile | null; email: string | null }) {
+export function DashboardHeader({
+  profile,
+  email,
+}: {
+  profile: Profile | null;
+  email: string | null;
+}) {
   return (
-    <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b bg-background/80 px-4 backdrop-blur supports-backdrop-filter:bg-background/60 sm:px-6">
+    <header className="bg-background/80 supports-backdrop-filter:bg-background/60 sticky top-0 z-30 flex h-16 items-center justify-between border-b px-4 backdrop-blur sm:px-6">
       <Link href="/dashboard" className="flex items-center gap-2 font-bold lg:hidden">
         <span className="flex size-8 items-center justify-center rounded-xl bg-indigo-600 text-white">
           <GraduationCap className="size-5" />

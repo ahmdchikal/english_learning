@@ -10,7 +10,11 @@ import {
 const noopSubscribe = () => () => {};
 
 export function useSpeechRecognition() {
-  const isSupported = useSyncExternalStore(noopSubscribe, isSpeechRecognitionSupported, () => false);
+  const isSupported = useSyncExternalStore(
+    noopSubscribe,
+    isSpeechRecognitionSupported,
+    () => false
+  );
   const [isListening, setIsListening] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const activeRef = useRef<ActiveRecognition | null>(null);

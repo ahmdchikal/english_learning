@@ -22,7 +22,7 @@ export function OfflineBanner() {
   if (isOnline) return null;
 
   return (
-    <div className="fixed inset-x-0 top-0 z-[60] flex items-center justify-center gap-2 bg-destructive px-4 py-2 text-center text-sm font-medium text-white">
+    <div className="bg-destructive fixed inset-x-0 top-0 z-[60] flex items-center justify-center gap-2 px-4 py-2 text-center text-sm font-medium text-white">
       <WifiOff className="size-4" />
       Anda sedang offline. Beberapa fitur mungkin tidak berfungsi hingga koneksi tersambung kembali.
     </div>

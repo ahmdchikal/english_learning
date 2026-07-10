@@ -11,11 +11,16 @@ export const PasswordInput = forwardRef<HTMLInputElement, React.ComponentProps<"
 
     return (
       <div className="relative">
-        <Input ref={ref} type={visible ? "text" : "password"} className={cn("pr-10", className)} {...props} />
+        <Input
+          ref={ref}
+          type={visible ? "text" : "password"}
+          className={cn("pr-10", className)}
+          {...props}
+        />
         <button
           type="button"
           onClick={() => setVisible((v) => !v)}
-          className="absolute inset-y-0 right-0 flex w-10 items-center justify-center text-muted-foreground hover:text-foreground focus-visible:outline-none"
+          className="text-muted-foreground hover:text-foreground absolute inset-y-0 right-0 flex w-10 items-center justify-center focus-visible:outline-none"
           aria-label={visible ? "Sembunyikan kata sandi" : "Tampilkan kata sandi"}
           tabIndex={-1}
         >

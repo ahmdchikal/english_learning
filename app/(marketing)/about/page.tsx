@@ -12,40 +12,40 @@ export default function AboutPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
       <h1 className="text-4xl font-bold tracking-tight">Tentang {siteConfig.name}</h1>
-      <p className="mt-4 text-lg text-muted-foreground">
+      <p className="text-muted-foreground mt-4 text-lg">
         {siteConfig.name} dibangun dengan satu tujuan sederhana: membantu siapa pun di Indonesia
         untuk belajar Bahasa Inggris secara terstruktur, mudah dipahami, dan menyenangkan — mulai
         dari nol hingga mahir.
       </p>
 
       <div className="mt-10 grid gap-6 sm:grid-cols-3">
-        <div className="rounded-2xl border bg-card p-6">
+        <div className="bg-card rounded-2xl border p-6">
           <Target className="size-8 text-indigo-600 dark:text-indigo-400" />
           <h2 className="mt-4 font-semibold">Misi Kami</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
+          <p className="text-muted-foreground mt-2 text-sm">
             Membuat pembelajaran Bahasa Inggris berkualitas dapat diakses oleh siapa saja, tanpa
             biaya.
           </p>
         </div>
-        <div className="rounded-2xl border bg-card p-6">
+        <div className="bg-card rounded-2xl border p-6">
           <Users className="size-8 text-indigo-600 dark:text-indigo-400" />
           <h2 className="mt-4 font-semibold">Untuk Siapa</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
+          <p className="text-muted-foreground mt-2 text-sm">
             Pelajar, mahasiswa, pekerja, dan siapa pun yang ingin meningkatkan kemampuan Bahasa
             Inggris mereka.
           </p>
         </div>
-        <div className="rounded-2xl border bg-card p-6">
+        <div className="bg-card rounded-2xl border p-6">
           <Heart className="size-8 text-indigo-600 dark:text-indigo-400" />
           <h2 className="mt-4 font-semibold">Pendekatan Kami</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
+          <p className="text-muted-foreground mt-2 text-sm">
             Penjelasan dalam Bahasa Indonesia, contoh nyata, dan latihan yang interaktif serta
             konsisten.
           </p>
         </div>
       </div>
 
-      <div className="mt-12 space-y-4 text-muted-foreground">
+      <div className="text-muted-foreground mt-12 space-y-4">
         <p>
           Materi pembelajaran kami disusun berdasarkan kerangka CEFR (Common European Framework of
           Reference for Languages) yang terdiri dari enam level: Pre-A1, A1, A2, B1, B2, dan C1.

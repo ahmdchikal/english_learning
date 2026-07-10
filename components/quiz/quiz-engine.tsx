@@ -75,7 +75,7 @@ export function QuizEngine({
     <div>
       <QuizProgressBar current={currentIndex + 1} total={shuffledQuestions.length} />
 
-      <div className="rounded-2xl border bg-card p-5 shadow-sm sm:p-6">
+      <div className="bg-card rounded-2xl border p-5 shadow-sm sm:p-6">
         <div className="flex items-start justify-between gap-3">
           <p className="text-lg font-semibold">{currentQuestion.prompt}</p>
           {(currentQuestion.type === "listening" || currentQuestion.type === "speaking") && (
@@ -83,7 +83,7 @@ export function QuizEngine({
           )}
         </div>
         {currentQuestion.instruction && (
-          <p className="mt-1 text-sm text-muted-foreground">{currentQuestion.instruction}</p>
+          <p className="text-muted-foreground mt-1 text-sm">{currentQuestion.instruction}</p>
         )}
 
         <div className="mt-4">
@@ -101,7 +101,7 @@ export function QuizEngine({
             className={
               currentCorrect
                 ? "mt-4 flex items-start gap-2 rounded-xl bg-emerald-50 p-3 text-sm text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300"
-                : "mt-4 flex items-start gap-2 rounded-xl bg-destructive/10 p-3 text-sm text-destructive"
+                : "bg-destructive/10 text-destructive mt-4 flex items-start gap-2 rounded-xl p-3 text-sm"
             }
           >
             {currentCorrect ? (
@@ -111,9 +111,13 @@ export function QuizEngine({
             )}
             <div>
               <p className="font-medium">
-                {currentCorrect ? "Benar!" : `Kurang tepat. Jawaban yang benar: ${currentQuestion.correct_answer}`}
+                {currentCorrect
+                  ? "Benar!"
+                  : `Kurang tepat. Jawaban yang benar: ${currentQuestion.correct_answer}`}
               </p>
-              {currentQuestion.explanation && <p className="mt-0.5 opacity-90">{currentQuestion.explanation}</p>}
+              {currentQuestion.explanation && (
+                <p className="mt-0.5 opacity-90">{currentQuestion.explanation}</p>
+              )}
             </div>
           </div>
         )}
@@ -133,7 +137,7 @@ export function QuizEngine({
         </div>
       </div>
 
-      <p className="mt-3 text-center text-xs text-muted-foreground">
+      <p className="text-muted-foreground mt-3 text-center text-xs">
         {answeredCount} dari {shuffledQuestions.length} soal telah dijawab
       </p>
     </div>

@@ -20,7 +20,14 @@ export function PronunciationButton({
 
   if (!isSupported) {
     return (
-      <Button type="button" size={size} variant="ghost" disabled title="Peramban tidak mendukung audio" className={className}>
+      <Button
+        type="button"
+        size={size}
+        variant="ghost"
+        disabled
+        title="Peramban tidak mendukung audio"
+        className={className}
+      >
         <VolumeX className="size-4" />
       </Button>
     );

@@ -16,13 +16,13 @@ export function PasswordStrengthMeter({ password }: { password: string }) {
           <div
             key={index}
             className={cn(
-              "h-1.5 flex-1 rounded-full bg-muted transition-colors",
+              "bg-muted h-1.5 flex-1 rounded-full transition-colors",
               index <= score && COLORS[score]
             )}
           />
         ))}
       </div>
-      <p className="text-xs text-muted-foreground">Kekuatan kata sandi: {label}</p>
+      <p className="text-muted-foreground text-xs">Kekuatan kata sandi: {label}</p>
     </div>
   );
 }

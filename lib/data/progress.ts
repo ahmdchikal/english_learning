@@ -31,7 +31,11 @@ export async function getProgressPageData(userId: string): Promise<ProgressPageD
   const [profileRes, progressRes, levelsRes, activitiesRes] = await Promise.all([
     supabase.from("profiles").select("current_streak, longest_streak").eq("id", userId).single(),
     supabase.from("user_lesson_progress").select("*").eq("user_id", userId),
-    supabase.from("levels").select("*").eq("is_published", true).order("order_index", { ascending: true }),
+    supabase
+      .from("levels")
+      .select("*")
+      .eq("is_published", true)
+      .order("order_index", { ascending: true }),
     supabase
       .from("daily_activities")
       .select("*")
@@ -46,18 +50,26 @@ export async function getProgressPageData(userId: string): Promise<ProgressPageD
   const { data: unitsData } = await supabase
     .from("units")
     .select("*")
-    .in("level_id", levels.map((l) => l.id))
+    .in(
+      "level_id",
+      levels.map((l) => l.id)
+    )
     .eq("is_published", true);
   const units = (unitsData as Unit[]) ?? [];
 
   const { data: lessonsData } = await supabase
     .from("lessons")
     .select("id, unit_id")
-    .in("unit_id", units.map((u) => u.id))
+    .in(
+      "unit_id",
+      units.map((u) => u.id)
+    )
     .eq("is_published", true);
   const lessons = (lessonsData as Pick<Lesson, "id" | "unit_id">[]) ?? [];
 
-  const completedLessonIds = new Set(progress.filter((p) => p.status === "completed").map((p) => p.lesson_id));
+  const completedLessonIds = new Set(
+    progress.filter((p) => p.status === "completed").map((p) => p.lesson_id)
+  );
 
   const levelSummaries: LevelProgressSummary[] = levels.map((level) => {
     const unitIds = new Set(units.filter((u) => u.level_id === level.id).map((u) => u.id));
@@ -67,13 +79,16 @@ export async function getProgressPageData(userId: string): Promise<ProgressPageD
       ...level,
       totalLessons: levelLessons.length,
       completedLessons,
-      progressPercent: levelLessons.length > 0 ? Math.round((completedLessons / levelLessons.length) * 100) : 0,
+      progressPercent:
+        levelLessons.length > 0 ? Math.round((completedLessons / levelLessons.length) * 100) : 0,
     };
   });
 
   const scored = progress.filter((p) => typeof p.best_quiz_score === "number");
   const averageQuizScore =
-    scored.length > 0 ? Math.round(scored.reduce((sum, p) => sum + (p.best_quiz_score ?? 0), 0) / scored.length) : 0;
+    scored.length > 0
+      ? Math.round(scored.reduce((sum, p) => sum + (p.best_quiz_score ?? 0), 0) / scored.length)
+      : 0;
 
   const speakingScores = progress
     .map((p) => p.best_speaking_score)
@@ -87,7 +102,9 @@ export async function getProgressPageData(userId: string): Promise<ProgressPageD
     .eq("attempt.user_id", userId);
 
   const lessonIdsWithIncorrect = new Map<string, number>();
-  for (const row of (incorrectAnswers as { attempt: { lesson_id: string } | { lesson_id: string }[] }[]) ?? []) {
+  for (const row of (incorrectAnswers as {
+    attempt: { lesson_id: string } | { lesson_id: string }[];
+  }[]) ?? []) {
     const attemptInfo = Array.isArray(row.attempt) ? row.attempt[0] : row.attempt;
     const lessonId = attemptInfo?.lesson_id;
     if (!lessonId) continue;

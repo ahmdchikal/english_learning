@@ -25,23 +25,23 @@ export function Testimonials() {
     <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Apa Kata Pengguna</h2>
-        <p className="mt-3 text-sm font-medium text-muted-foreground">
+        <p className="text-muted-foreground mt-3 text-sm font-medium">
           *Contoh testimoni demo untuk ilustrasi — bukan pengguna sungguhan.
         </p>
       </div>
 
       <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3">
         {TESTIMONIALS.map((testimonial) => (
-          <div key={testimonial.name} className="rounded-2xl border bg-card p-6 shadow-sm">
+          <div key={testimonial.name} className="bg-card rounded-2xl border p-6 shadow-sm">
             <Quote className="size-6 text-indigo-400" />
-            <p className="mt-4 text-sm text-muted-foreground">&ldquo;{testimonial.quote}&rdquo;</p>
+            <p className="text-muted-foreground mt-4 text-sm">&ldquo;{testimonial.quote}&rdquo;</p>
             <div className="mt-4 flex items-center gap-3 border-t pt-4">
               <span className="flex size-9 items-center justify-center rounded-full bg-indigo-100 text-sm font-semibold text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-300">
                 {testimonial.name.charAt(0)}
               </span>
               <div>
                 <p className="text-sm font-semibold">{testimonial.name}</p>
-                <p className="text-xs text-muted-foreground">{testimonial.role}</p>
+                <p className="text-muted-foreground text-xs">{testimonial.role}</p>
               </div>
             </div>
           </div>

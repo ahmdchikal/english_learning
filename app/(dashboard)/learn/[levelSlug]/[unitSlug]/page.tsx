@@ -47,7 +47,11 @@ export default async function UnitLessonsPage({ params }: PageProps) {
       <PageHeader title={unit.title} description={unit.description} />
 
       {lessons.length === 0 ? (
-        <EmptyState icon={BookOpen} title="Belum ada pelajaran" description="Pelajaran untuk unit ini belum ditambahkan." />
+        <EmptyState
+          icon={BookOpen}
+          title="Belum ada pelajaran"
+          description="Pelajaran untuk unit ini belum ditambahkan."
+        />
       ) : (
         <ol className="space-y-3">
           {lessons.map((lesson, index) => {
@@ -55,7 +59,7 @@ export default async function UnitLessonsPage({ params }: PageProps) {
             const content = (
               <div
                 className={cn(
-                  "flex items-center gap-4 rounded-2xl border bg-card p-4 shadow-sm transition-shadow sm:p-5",
+                  "bg-card flex items-center gap-4 rounded-2xl border p-4 shadow-sm transition-shadow sm:p-5",
                   lesson.unlocked ? "hover:shadow-md" : "opacity-70"
                 )}
               >
@@ -68,9 +72,9 @@ export default async function UnitLessonsPage({ params }: PageProps) {
                   )}
                 />
                 <div className="min-w-0 flex-1">
-                  <p className="text-xs font-medium text-muted-foreground">Pelajaran {index + 1}</p>
+                  <p className="text-muted-foreground text-xs font-medium">Pelajaran {index + 1}</p>
                   <h2 className="font-semibold">{lesson.title}</h2>
-                  <div className="mt-1 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
+                  <div className="text-muted-foreground mt-1 flex flex-wrap items-center gap-3 text-xs">
                     <span className="flex items-center gap-1">
                       <Clock className="size-3.5" />
                       {lesson.estimated_minutes} menit
@@ -84,7 +88,7 @@ export default async function UnitLessonsPage({ params }: PageProps) {
                     )}
                   </div>
                 </div>
-                {!lesson.unlocked && <Lock className="size-5 shrink-0 text-muted-foreground" />}
+                {!lesson.unlocked && <Lock className="text-muted-foreground size-5 shrink-0" />}
               </div>
             );
 

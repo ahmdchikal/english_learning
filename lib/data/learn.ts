@@ -28,14 +28,20 @@ export async function getLevelsOverview(): Promise<LevelOverview[]> {
   const { data: unitsData } = await supabase
     .from("units")
     .select("*")
-    .in("level_id", levels.map((l) => l.id))
+    .in(
+      "level_id",
+      levels.map((l) => l.id)
+    )
     .eq("is_published", true);
   const units = (unitsData as Unit[]) ?? [];
 
   const { data: lessonsData } = await supabase
     .from("lessons")
     .select("id, unit_id")
-    .in("unit_id", units.map((u) => u.id))
+    .in(
+      "unit_id",
+      units.map((u) => u.id)
+    )
     .eq("is_published", true);
   const lessons = (lessonsData as Pick<Lesson, "id" | "unit_id">[]) ?? [];
 
@@ -69,7 +75,8 @@ export async function getLevelsOverview(): Promise<LevelOverview[]> {
       ...level,
       totalLessons: levelLessons.length,
       completedLessons,
-      progressPercent: levelLessons.length > 0 ? Math.round((completedLessons / levelLessons.length) * 100) : 0,
+      progressPercent:
+        levelLessons.length > 0 ? Math.round((completedLessons / levelLessons.length) * 100) : 0,
       unlocked: Boolean(unlockChecks[index]?.data),
     };
   });
@@ -86,7 +93,12 @@ export async function getLevelWithUnits(
 ): Promise<{ level: Level; units: UnitOverview[] } | null> {
   const supabase = await createClient();
 
-  const { data: levelData } = await supabase.from("levels").select("*").eq("slug", levelSlug).eq("is_published", true).single();
+  const { data: levelData } = await supabase
+    .from("levels")
+    .select("*")
+    .eq("slug", levelSlug)
+    .eq("is_published", true)
+    .single();
   const level = levelData as Level | null;
   if (!level) return null;
 
@@ -101,7 +113,10 @@ export async function getLevelWithUnits(
   const { data: lessonsData } = await supabase
     .from("lessons")
     .select("*")
-    .in("unit_id", units.map((u) => u.id))
+    .in(
+      "unit_id",
+      units.map((u) => u.id)
+    )
     .eq("is_published", true)
     .order("order_index", { ascending: true });
   const lessons = (lessonsData as Lesson[]) ?? [];
@@ -131,7 +146,8 @@ export async function getLevelWithUnits(
     units.map((unit) => {
       const firstLesson = firstLessonPerUnit.get(unit.id);
       if (!firstLesson) return Promise.resolve({ data: unit.force_unlocked });
-      if (!userData.user) return Promise.resolve({ data: unit.order_index === 0 && level.order_index === 0 });
+      if (!userData.user)
+        return Promise.resolve({ data: unit.order_index === 0 && level.order_index === 0 });
       return supabase.rpc("is_lesson_unlocked", { p_lesson_id: firstLesson.id });
     })
   );
@@ -162,7 +178,12 @@ export async function getUnitWithLessons(
 ): Promise<{ level: Level; unit: Unit; lessons: LessonOverview[] } | null> {
   const supabase = await createClient();
 
-  const { data: levelData } = await supabase.from("levels").select("*").eq("slug", levelSlug).eq("is_published", true).single();
+  const { data: levelData } = await supabase
+    .from("levels")
+    .select("*")
+    .eq("slug", levelSlug)
+    .eq("is_published", true)
+    .single();
   const level = levelData as Level | null;
   if (!level) return null;
 
@@ -191,14 +212,20 @@ export async function getUnitWithLessons(
       .from("user_lesson_progress")
       .select("*")
       .eq("user_id", userData.user.id)
-      .in("lesson_id", lessons.map((l) => l.id));
+      .in(
+        "lesson_id",
+        lessons.map((l) => l.id)
+      );
     progress = (progressData as UserLessonProgress[]) ?? [];
   }
   const progressByLesson = new Map(progress.map((p) => [p.lesson_id, p]));
 
   const unlockChecks = await Promise.all(
     lessons.map((lesson, index) => {
-      if (!userData.user) return Promise.resolve({ data: index === 0 && unit.order_index === 0 && level.order_index === 0 });
+      if (!userData.user)
+        return Promise.resolve({
+          data: index === 0 && unit.order_index === 0 && level.order_index === 0,
+        });
       return supabase.rpc("is_lesson_unlocked", { p_lesson_id: lesson.id });
     })
   );

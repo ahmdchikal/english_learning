@@ -53,14 +53,24 @@ export function VocabularyForm({
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="english_word">Kata Bahasa Inggris</Label>
-          <Input id="english_word" {...register("english_word")} aria-invalid={!!errors.english_word} />
-          {errors.english_word && <p className="text-sm text-destructive">{errors.english_word.message}</p>}
+          <Input
+            id="english_word"
+            {...register("english_word")}
+            aria-invalid={!!errors.english_word}
+          />
+          {errors.english_word && (
+            <p className="text-destructive text-sm">{errors.english_word.message}</p>
+          )}
         </div>
         <div className="space-y-2">
           <Label htmlFor="indonesian_meaning">Arti Bahasa Indonesia</Label>
-          <Input id="indonesian_meaning" {...register("indonesian_meaning")} aria-invalid={!!errors.indonesian_meaning} />
+          <Input
+            id="indonesian_meaning"
+            {...register("indonesian_meaning")}
+            aria-invalid={!!errors.indonesian_meaning}
+          />
           {errors.indonesian_meaning && (
-            <p className="text-sm text-destructive">{errors.indonesian_meaning.message}</p>
+            <p className="text-destructive text-sm">{errors.indonesian_meaning.message}</p>
           )}
         </div>
       </div>
@@ -88,7 +98,11 @@ export function VocabularyForm({
 
       <div className="space-y-2">
         <Label htmlFor="order_index">Urutan</Label>
-        <Input id="order_index" type="number" {...register("order_index", { valueAsNumber: true })} />
+        <Input
+          id="order_index"
+          type="number"
+          {...register("order_index", { valueAsNumber: true })}
+        />
       </div>
 
       <Button type="submit" className="w-full" disabled={isSubmitting}>

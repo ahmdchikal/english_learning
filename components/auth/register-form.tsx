@@ -42,9 +42,9 @@ export function RegisterForm() {
 
   if (submitted) {
     return (
-      <div className="rounded-2xl border bg-card p-6 text-center shadow-sm">
+      <div className="bg-card rounded-2xl border p-6 text-center shadow-sm">
         <h2 className="text-lg font-semibold">Periksa email Anda</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
+        <p className="text-muted-foreground mt-2 text-sm">
           Kami telah mengirimkan tautan verifikasi ke email Anda. Silakan verifikasi sebelum masuk.
         </p>
       </div>
@@ -62,7 +62,7 @@ export function RegisterForm() {
           aria-invalid={!!errors.fullName}
           {...register("fullName")}
         />
-        {errors.fullName && <p className="text-sm text-destructive">{errors.fullName.message}</p>}
+        {errors.fullName && <p className="text-destructive text-sm">{errors.fullName.message}</p>}
       </div>
 
       <div className="space-y-2">
@@ -75,7 +75,7 @@ export function RegisterForm() {
           aria-invalid={!!errors.email}
           {...register("email")}
         />
-        {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
+        {errors.email && <p className="text-destructive text-sm">{errors.email.message}</p>}
       </div>
 
       <div className="space-y-2">
@@ -88,7 +88,7 @@ export function RegisterForm() {
           {...register("password")}
         />
         <PasswordStrengthMeter password={password ?? ""} />
-        {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
+        {errors.password && <p className="text-destructive text-sm">{errors.password.message}</p>}
       </div>
 
       <div className="space-y-2">
@@ -101,7 +101,7 @@ export function RegisterForm() {
           {...register("confirmPassword")}
         />
         {errors.confirmPassword && (
-          <p className="text-sm text-destructive">{errors.confirmPassword.message}</p>
+          <p className="text-destructive text-sm">{errors.confirmPassword.message}</p>
         )}
       </div>
 

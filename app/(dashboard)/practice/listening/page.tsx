@@ -17,7 +17,10 @@ export default async function ListeningPracticePage() {
 
   return (
     <PageContainer className="max-w-2xl">
-      <PageHeader title="Latihan Mendengarkan" description="Dengarkan audio dan pilih jawaban yang tepat." />
+      <PageHeader
+        title="Latihan Mendengarkan"
+        description="Dengarkan audio dan pilih jawaban yang tepat."
+      />
 
       {questions.length === 0 ? (
         <EmptyState

@@ -41,7 +41,9 @@ export function ChangePasswordForm() {
           aria-invalid={!!errors.newPassword}
           {...register("newPassword")}
         />
-        {errors.newPassword && <p className="text-sm text-destructive">{errors.newPassword.message}</p>}
+        {errors.newPassword && (
+          <p className="text-destructive text-sm">{errors.newPassword.message}</p>
+        )}
       </div>
 
       <div className="space-y-2">
@@ -53,7 +55,7 @@ export function ChangePasswordForm() {
           {...register("confirmPassword")}
         />
         {errors.confirmPassword && (
-          <p className="text-sm text-destructive">{errors.confirmPassword.message}</p>
+          <p className="text-destructive text-sm">{errors.confirmPassword.message}</p>
         )}
       </div>
 

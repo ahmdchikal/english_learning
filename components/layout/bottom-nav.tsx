@@ -11,7 +11,7 @@ export function BottomNav() {
   return (
     <nav
       aria-label="Navigasi utama"
-      className="fixed inset-x-0 bottom-0 z-40 flex border-t bg-card/95 backdrop-blur supports-backdrop-filter:bg-card/80 lg:hidden"
+      className="bg-card/95 supports-backdrop-filter:bg-card/80 fixed inset-x-0 bottom-0 z-40 flex border-t backdrop-blur lg:hidden"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
       {MAIN_NAV_ITEMS.map((item) => {
@@ -26,7 +26,9 @@ export function BottomNav() {
             )}
             aria-current={active ? "page" : undefined}
           >
-            <item.icon className={cn("size-5", active && "fill-indigo-100 dark:fill-indigo-500/20")} />
+            <item.icon
+              className={cn("size-5", active && "fill-indigo-100 dark:fill-indigo-500/20")}
+            />
             {item.label}
           </Link>
         );

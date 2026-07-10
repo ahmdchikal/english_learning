@@ -20,12 +20,14 @@ export function StatCard({
   };
 
   return (
-    <div className="rounded-2xl border bg-card p-4 shadow-sm sm:p-5">
-      <div className={cn("flex size-10 items-center justify-center rounded-xl", accentClasses[accent])}>
+    <div className="bg-card rounded-2xl border p-4 shadow-sm sm:p-5">
+      <div
+        className={cn("flex size-10 items-center justify-center rounded-xl", accentClasses[accent])}
+      >
         <Icon className="size-5" />
       </div>
       <p className="mt-3 text-2xl font-bold tracking-tight">{value}</p>
-      <p className="text-sm text-muted-foreground">{label}</p>
+      <p className="text-muted-foreground text-sm">{label}</p>
     </div>
   );
 }

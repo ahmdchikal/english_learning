@@ -8,7 +8,7 @@ export function LevelsOverview() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">6 Level Berbasis CEFR</h2>
-          <p className="mt-3 text-muted-foreground">
+          <p className="text-muted-foreground mt-3">
             Mulai dari nol atau lanjutkan dari level yang sesuai dengan kemampuan Anda.
           </p>
         </div>
@@ -17,7 +17,7 @@ export function LevelsOverview() {
           {LEVEL_CATALOG.map((level) => (
             <div
               key={level.slug}
-              className="flex items-start gap-4 rounded-2xl border bg-card p-5 shadow-sm"
+              className="bg-card flex items-start gap-4 rounded-2xl border p-5 shadow-sm"
             >
               <span
                 className={`flex size-12 shrink-0 items-center justify-center rounded-xl text-sm font-bold text-white ${level.color}`}
@@ -26,7 +26,7 @@ export function LevelsOverview() {
               </span>
               <div>
                 <h3 className="font-semibold">{level.name}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{level.description}</p>
+                <p className="text-muted-foreground mt-1 text-sm">{level.description}</p>
               </div>
             </div>
           ))}

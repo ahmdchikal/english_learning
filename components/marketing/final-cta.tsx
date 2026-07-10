@@ -13,7 +13,12 @@ export function FinalCta() {
           kartu kredit.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <LinkButton href="/register" size="lg" variant="secondary" className="h-12 px-6 text-base">
+          <LinkButton
+            href="/register"
+            size="lg"
+            variant="secondary"
+            className="h-12 px-6 text-base"
+          >
             Mulai Belajar Gratis
             <ArrowRight className="size-4" />
           </LinkButton>

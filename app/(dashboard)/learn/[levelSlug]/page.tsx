@@ -47,7 +47,7 @@ export default async function LevelUnitsPage({ params }: PageProps) {
             const content = (
               <div
                 className={cn(
-                  "flex items-center gap-4 rounded-2xl border bg-card p-4 shadow-sm transition-shadow sm:p-5",
+                  "bg-card flex items-center gap-4 rounded-2xl border p-4 shadow-sm transition-shadow sm:p-5",
                   unit.unlocked ? "hover:shadow-md" : "opacity-70"
                 )}
               >
@@ -56,7 +56,7 @@ export default async function LevelUnitsPage({ params }: PageProps) {
                 </span>
                 <div className="min-w-0 flex-1">
                   <h2 className="font-semibold">{unit.title}</h2>
-                  <p className="truncate text-sm text-muted-foreground">{unit.description}</p>
+                  <p className="text-muted-foreground truncate text-sm">{unit.description}</p>
                   {unit.unlocked && unit.totalLessons > 0 && (
                     <div className="mt-2 max-w-xs">
                       <Progress
@@ -67,17 +67,17 @@ export default async function LevelUnitsPage({ params }: PageProps) {
                   )}
                 </div>
                 <div className="shrink-0 text-right">
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-muted-foreground text-xs">
                     {unit.completedLessons}/{unit.totalLessons} pelajaran
                   </p>
                   {unit.unlocked ? (
                     unit.completedLessons === unit.totalLessons && unit.totalLessons > 0 ? (
                       <CheckCircle2 className="mt-1 ml-auto size-5 text-emerald-500" />
                     ) : (
-                      <ChevronRight className="mt-1 ml-auto size-5 text-muted-foreground" />
+                      <ChevronRight className="text-muted-foreground mt-1 ml-auto size-5" />
                     )
                   ) : (
-                    <Lock className="mt-1 ml-auto size-5 text-muted-foreground" />
+                    <Lock className="text-muted-foreground mt-1 ml-auto size-5" />
                   )}
                 </div>
               </div>

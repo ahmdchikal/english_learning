@@ -36,7 +36,7 @@ export function ForgotPasswordForm() {
     return (
       <div className="space-y-2 text-center">
         <MailCheck className="mx-auto size-10 text-emerald-500" />
-        <p className="text-sm text-muted-foreground">
+        <p className="text-muted-foreground text-sm">
           Jika email terdaftar, kami telah mengirimkan tautan reset kata sandi. Periksa kotak masuk
           Anda.
         </p>
@@ -56,7 +56,7 @@ export function ForgotPasswordForm() {
           aria-invalid={!!errors.email}
           {...register("email")}
         />
-        {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
+        {errors.email && <p className="text-destructive text-sm">{errors.email.message}</p>}
       </div>
 
       <Button type="submit" className="w-full" disabled={isSubmitting}>

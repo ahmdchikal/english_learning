@@ -17,9 +17,7 @@ export function createAdminClient() {
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!url || !serviceRoleKey) {
-    throw new Error(
-      "SUPABASE_SERVICE_ROLE_KEY belum dikonfigurasi di environment variables."
-    );
+    throw new Error("SUPABASE_SERVICE_ROLE_KEY belum dikonfigurasi di environment variables.");
   }
 
   return createSupabaseClient(url, serviceRoleKey, {

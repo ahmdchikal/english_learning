@@ -6,7 +6,14 @@ import { Pencil, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { FormDialog } from "@/components/admin/form-dialog";
 import { UnitForm } from "@/components/admin/unit-form";
 import { ConfirmDialog } from "@/components/common/confirm-dialog";
@@ -26,8 +33,24 @@ export function UnitsTable({
   return (
     <div>
       <div className="mb-4 flex justify-end">
-        <FormDialog trigger={<Button><Plus className="size-4" />Tambah Unit</Button>} title="Tambah Unit Baru">
-          {(close) => <UnitForm levels={levels} onSuccess={() => { close(); refresh(); }} />}
+        <FormDialog
+          trigger={
+            <Button>
+              <Plus className="size-4" />
+              Tambah Unit
+            </Button>
+          }
+          title="Tambah Unit Baru"
+        >
+          {(close) => (
+            <UnitForm
+              levels={levels}
+              onSuccess={() => {
+                close();
+                refresh();
+              }}
+            />
+          )}
         </FormDialog>
       </div>
 
@@ -72,12 +95,21 @@ export function UnitsTable({
                       }
                       title="Edit Unit"
                     >
-                      {(close) => <UnitForm unit={unit} levels={levels} onSuccess={() => { close(); refresh(); }} />}
+                      {(close) => (
+                        <UnitForm
+                          unit={unit}
+                          levels={levels}
+                          onSuccess={() => {
+                            close();
+                            refresh();
+                          }}
+                        />
+                      )}
                     </FormDialog>
                     <ConfirmDialog
                       trigger={
                         <Button size="icon-sm" variant="ghost">
-                          <Trash2 className="size-4 text-destructive" />
+                          <Trash2 className="text-destructive size-4" />
                         </Button>
                       }
                       title={`Hapus unit "${unit.title}"?`}

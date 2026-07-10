@@ -13,10 +13,10 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <div className="space-y-6 rounded-2xl border bg-card p-6 shadow-sm sm:p-8">
+    <div className="bg-card space-y-6 rounded-2xl border p-6 shadow-sm sm:p-8">
       <div className="space-y-1 text-center">
         <h1 className="text-2xl font-bold tracking-tight">Selamat Datang Kembali</h1>
-        <p className="text-sm text-muted-foreground">Masuk untuk melanjutkan pembelajaran Anda</p>
+        <p className="text-muted-foreground text-sm">Masuk untuk melanjutkan pembelajaran Anda</p>
       </div>
 
       <Suspense>
@@ -25,15 +25,18 @@ export default function LoginPage() {
 
       <div className="flex items-center gap-3">
         <Separator className="flex-1" />
-        <span className="text-xs text-muted-foreground">atau</span>
+        <span className="text-muted-foreground text-xs">atau</span>
         <Separator className="flex-1" />
       </div>
 
       <GoogleAuthButton />
 
-      <p className="text-center text-sm text-muted-foreground">
+      <p className="text-muted-foreground text-center text-sm">
         Belum punya akun?{" "}
-        <Link href="/register" className="font-medium text-indigo-600 hover:underline dark:text-indigo-400">
+        <Link
+          href="/register"
+          className="font-medium text-indigo-600 hover:underline dark:text-indigo-400"
+        >
           Daftar sekarang
         </Link>
       </p>

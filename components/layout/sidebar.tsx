@@ -13,8 +13,8 @@ export function Sidebar({ isAdmin }: { isAdmin: boolean }) {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden w-64 shrink-0 flex-col border-r bg-card px-4 py-6 lg:flex">
-      <Link href="/dashboard" className="flex items-center gap-2 px-2 font-bold text-lg">
+    <aside className="bg-card hidden w-64 shrink-0 flex-col border-r px-4 py-6 lg:flex">
+      <Link href="/dashboard" className="flex items-center gap-2 px-2 text-lg font-bold">
         <span className="flex size-8 items-center justify-center rounded-xl bg-indigo-600 text-white">
           <GraduationCap className="size-5" />
         </span>
@@ -41,7 +41,7 @@ export function Sidebar({ isAdmin }: { isAdmin: boolean }) {
           );
         })}
 
-        <div className="my-3 h-px bg-border" />
+        <div className="bg-border my-3 h-px" />
 
         {SIDEBAR_SECONDARY_ITEMS.map((item) => {
           const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
@@ -79,7 +79,11 @@ export function Sidebar({ isAdmin }: { isAdmin: boolean }) {
       </nav>
 
       <form action={logoutAction}>
-        <Button type="submit" variant="ghost" className="w-full justify-start gap-3 text-muted-foreground">
+        <Button
+          type="submit"
+          variant="ghost"
+          className="text-muted-foreground w-full justify-start gap-3"
+        >
           <LogOut className="size-4.5" />
           Keluar
         </Button>

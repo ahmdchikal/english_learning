@@ -29,19 +29,22 @@ export function PracticeFeatures() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Latihan yang Beragam</h2>
-          <p className="mt-3 text-muted-foreground">
+          <p className="text-muted-foreground mt-3">
             Kuasai empat keterampilan bahasa: membaca, mendengarkan, menulis, dan berbicara.
           </p>
         </div>
 
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {FEATURES.map((feature) => (
-            <div key={feature.title} className="rounded-2xl border bg-card p-6 text-center shadow-sm">
+            <div
+              key={feature.title}
+              className="bg-card rounded-2xl border p-6 text-center shadow-sm"
+            >
               <div className="mx-auto flex size-12 items-center justify-center rounded-xl bg-emerald-600/10 text-emerald-600 dark:text-emerald-400">
                 <feature.icon className="size-6" />
               </div>
               <h3 className="mt-4 font-semibold">{feature.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{feature.description}</p>
+              <p className="text-muted-foreground mt-2 text-sm">{feature.description}</p>
             </div>
           ))}
         </div>

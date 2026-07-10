@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageContainer } from "@/components/common/page-container";
 import { PageHeader } from "@/components/common/page-header";
+import { Breadcrumbs } from "@/components/common/breadcrumbs";
 import { LessonsTable } from "@/components/admin/lessons-table";
 import { getAllLessons, getAllUnits } from "@/lib/data/admin";
 
@@ -15,6 +16,10 @@ export default async function AdminLessonsPage() {
 
   return (
     <PageContainer>
+      <Breadcrumbs
+        items={[{ label: "Panel Admin", href: "/admin" }, { label: "Pelajaran" }]}
+        homeHref="/admin"
+      />
       <PageHeader
         title="Kelola Pelajaran"
         description="Buat, ubah, dan publikasikan pelajaran. Klik judul untuk mengelola kosakata dan contoh kalimat."

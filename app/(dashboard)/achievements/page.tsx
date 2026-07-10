@@ -32,12 +32,18 @@ export default async function AchievementsPage() {
       />
 
       {achievements.length === 0 ? (
-        <EmptyState icon={Trophy} title="Belum ada pencapaian" description="Pencapaian belum ditambahkan oleh administrator." />
+        <EmptyState
+          icon={Trophy}
+          title="Belum ada pencapaian"
+          description="Pencapaian belum ditambahkan oleh administrator."
+        />
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {achievements.map((achievement) => {
             const earned = Boolean(achievement.earnedAt);
-            const percent = Math.round((achievement.currentProgress / achievement.requirement_value) * 100);
+            const percent = Math.round(
+              (achievement.currentProgress / achievement.requirement_value) * 100
+            );
 
             return (
               <div
@@ -58,7 +64,7 @@ export default async function AchievementsPage() {
                   </span>
                   <div className="min-w-0">
                     <h3 className="font-semibold">{achievement.name}</h3>
-                    <p className="text-sm text-muted-foreground">{achievement.description}</p>
+                    <p className="text-muted-foreground text-sm">{achievement.description}</p>
                   </div>
                 </div>
 
@@ -69,13 +75,13 @@ export default async function AchievementsPage() {
                 ) : (
                   <div className="mt-3">
                     <Progress value={percent} indicatorClassName="bg-indigo-500" />
-                    <p className="mt-1 text-xs text-muted-foreground">
+                    <p className="text-muted-foreground mt-1 text-xs">
                       {achievement.currentProgress}/{achievement.requirement_value}
                     </p>
                   </div>
                 )}
 
-                <p className="mt-2 text-xs text-muted-foreground">+{achievement.xp_reward} XP</p>
+                <p className="text-muted-foreground mt-2 text-xs">+{achievement.xp_reward} XP</p>
               </div>
             );
           })}

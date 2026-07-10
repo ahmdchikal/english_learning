@@ -19,7 +19,13 @@ function getInitials(name: string): string {
   );
 }
 
-export function AvatarUpload({ avatarUrl, fullName }: { avatarUrl: string | null; fullName: string }) {
+export function AvatarUpload({
+  avatarUrl,
+  fullName,
+}: {
+  avatarUrl: string | null;
+  fullName: string;
+}) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
   const [preview, setPreview] = useState<string | null>(avatarUrl);
@@ -58,12 +64,14 @@ export function AvatarUpload({ avatarUrl, fullName }: { avatarUrl: string | null
       <div className="relative">
         <Avatar className="size-24">
           <AvatarImage src={preview ?? undefined} alt={fullName} />
-          <AvatarFallback className="bg-indigo-600 text-2xl text-white">{getInitials(fullName)}</AvatarFallback>
+          <AvatarFallback className="bg-indigo-600 text-2xl text-white">
+            {getInitials(fullName)}
+          </AvatarFallback>
         </Avatar>
         <Button
           type="button"
           size="icon-sm"
-          className="absolute -bottom-1 -right-1 rounded-full"
+          className="absolute -right-1 -bottom-1 rounded-full"
           onClick={() => inputRef.current?.click()}
           disabled={uploading}
           aria-label="Unggah foto profil"
@@ -78,7 +86,7 @@ export function AvatarUpload({ avatarUrl, fullName }: { avatarUrl: string | null
         className="hidden"
         onChange={handleFileChange}
       />
-      <p className="text-xs text-muted-foreground">PNG, JPEG, atau WebP. Maksimal 2MB.</p>
+      <p className="text-muted-foreground text-xs">PNG, JPEG, atau WebP. Maksimal 2MB.</p>
     </div>
   );
 }

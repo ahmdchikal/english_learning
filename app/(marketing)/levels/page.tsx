@@ -59,7 +59,7 @@ export default async function LevelsPage() {
     <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
       <div className="text-center">
         <h1 className="text-4xl font-bold tracking-tight">Level Belajar EnglishPath</h1>
-        <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
+        <p className="text-muted-foreground mx-auto mt-3 max-w-2xl">
           Enam level berbasis CEFR yang membawa Anda dari pemula absolut hingga mahir. Daftar untuk
           mulai belajar dan melacak progres Anda di setiap level.
         </p>
@@ -72,7 +72,7 @@ export default async function LevelsPage() {
           return (
             <div
               key={slug}
-              className="flex flex-col gap-4 rounded-2xl border bg-card p-6 shadow-sm sm:flex-row sm:items-center sm:justify-between"
+              className="bg-card flex flex-col gap-4 rounded-2xl border p-6 shadow-sm sm:flex-row sm:items-center sm:justify-between"
             >
               <div className="flex items-start gap-4">
                 <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-indigo-600 text-sm font-bold text-white">
@@ -80,12 +80,12 @@ export default async function LevelsPage() {
                 </span>
                 <div>
                   <h2 className="font-semibold">{title}</h2>
-                  <p className="mt-1 max-w-xl text-sm text-muted-foreground">{description}</p>
+                  <p className="text-muted-foreground mt-1 max-w-xl text-sm">{description}</p>
                 </div>
               </div>
               <div className="flex shrink-0 items-center gap-2 self-start sm:self-center">
                 {locked && (
-                  <span className="flex items-center gap-1 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">
+                  <span className="bg-muted text-muted-foreground flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium">
                     <Lock className="size-3" /> Perlu daftar
                   </span>
                 )}
@@ -103,7 +103,7 @@ export default async function LevelsPage() {
       </div>
 
       {!hasData && (
-        <p className="mt-8 text-center text-sm text-muted-foreground">
+        <p className="text-muted-foreground mt-8 text-center text-sm">
           Menampilkan gambaran umum level. Daftar untuk melihat unit dan pelajaran lengkap.
         </p>
       )}

@@ -4,7 +4,7 @@ import type { Vocabulary } from "@/types/database";
 
 export function VocabularyCard({ item }: { item: Vocabulary }) {
   return (
-    <div className="rounded-2xl border bg-card p-4 shadow-sm">
+    <div className="bg-card rounded-2xl border p-4 shadow-sm">
       <div className="flex items-start justify-between gap-2">
         <div>
           <div className="flex items-center gap-2">
@@ -13,7 +13,7 @@ export function VocabularyCard({ item }: { item: Vocabulary }) {
               {item.word_type}
             </Badge>
           </div>
-          {item.phonetic && <p className="text-xs text-muted-foreground">/{item.phonetic}/</p>}
+          {item.phonetic && <p className="text-muted-foreground text-xs">/{item.phonetic}/</p>}
         </div>
         <PronunciationButton text={item.english_word} size="icon-sm" />
       </div>
@@ -21,13 +21,13 @@ export function VocabularyCard({ item }: { item: Vocabulary }) {
         {item.indonesian_meaning}
       </p>
       {item.example_sentence && (
-        <div className="mt-3 rounded-xl bg-muted/50 p-3">
+        <div className="bg-muted/50 mt-3 rounded-xl p-3">
           <div className="flex items-start justify-between gap-2">
             <p className="text-sm italic">&ldquo;{item.example_sentence}&rdquo;</p>
             <PronunciationButton text={item.example_sentence} size="icon-sm" />
           </div>
           {item.example_translation && (
-            <p className="mt-1 text-xs text-muted-foreground">{item.example_translation}</p>
+            <p className="text-muted-foreground mt-1 text-xs">{item.example_translation}</p>
           )}
         </div>
       )}

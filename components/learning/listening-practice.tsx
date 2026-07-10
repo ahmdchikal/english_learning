@@ -38,14 +38,14 @@ export function ListeningPractice({ questions }: { questions: ListeningQuestion[
 
   return (
     <div>
-      <div className="mb-4 flex items-center justify-between text-sm text-muted-foreground">
+      <div className="text-muted-foreground mb-4 flex items-center justify-between text-sm">
         <span>
           Soal {(index % order.length) + 1} dari {order.length}
         </span>
         <span>Benar: {correctCount}</span>
       </div>
 
-      <div className="rounded-2xl border bg-card p-5 shadow-sm sm:p-6">
+      <div className="bg-card rounded-2xl border p-5 shadow-sm sm:p-6">
         <div className="flex items-center justify-center gap-3 rounded-xl bg-indigo-50 p-6 dark:bg-indigo-500/10">
           <Headphones className="size-6 text-indigo-600 dark:text-indigo-400" />
           <PronunciationButton
@@ -54,15 +54,22 @@ export function ListeningPractice({ questions }: { questions: ListeningQuestion[
             className="w-auto gap-2 px-4"
           />
         </div>
-        <p className="mt-3 text-center text-sm text-muted-foreground">{question.instruction || question.prompt}</p>
+        <p className="text-muted-foreground mt-3 text-center text-sm">
+          {question.instruction || question.prompt}
+        </p>
 
-        <RadioGroup value={selected ?? ""} onValueChange={setSelected} disabled={revealed} className="mt-4 gap-2">
+        <RadioGroup
+          value={selected ?? ""}
+          onValueChange={setSelected}
+          disabled={revealed}
+          className="mt-4 gap-2"
+        >
           {shuffledOptions.map((option) => (
             <Label
               key={option.id}
               htmlFor={option.id}
               className={cn(
-                "flex cursor-pointer items-center gap-3 rounded-xl border p-3 hover:bg-muted/50",
+                "hover:bg-muted/50 flex cursor-pointer items-center gap-3 rounded-xl border p-3",
                 revealed &&
                   option.option_text === question.correct_answer &&
                   "border-emerald-500 bg-emerald-50 dark:bg-emerald-500/10",
@@ -82,12 +89,20 @@ export function ListeningPractice({ questions }: { questions: ListeningQuestion[
           <div
             className={cn(
               "mt-4 flex items-start gap-2 rounded-xl p-3 text-sm",
-              isCorrect ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300" : "bg-destructive/10 text-destructive"
+              isCorrect
+                ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300"
+                : "bg-destructive/10 text-destructive"
             )}
           >
-            {isCorrect ? <CheckCircle2 className="mt-0.5 size-4 shrink-0" /> : <XCircle className="mt-0.5 size-4 shrink-0" />}
+            {isCorrect ? (
+              <CheckCircle2 className="mt-0.5 size-4 shrink-0" />
+            ) : (
+              <XCircle className="mt-0.5 size-4 shrink-0" />
+            )}
             <div>
-              <p className="font-medium">{isCorrect ? "Benar!" : `Jawaban yang benar: ${question.correct_answer}`}</p>
+              <p className="font-medium">
+                {isCorrect ? "Benar!" : `Jawaban yang benar: ${question.correct_answer}`}
+              </p>
               {question.explanation && <p className="mt-0.5 opacity-90">{question.explanation}</p>}
             </div>
           </div>

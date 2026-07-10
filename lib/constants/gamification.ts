@@ -24,7 +24,11 @@ export const ACHIEVEMENT_ICON_MAP: Record<string, string> = {
 };
 
 /** Mirrors the XP-based "learner rank" shown on the dashboard/profile. */
-export function getLearnerRank(totalXp: number): { rank: number; label: string; nextRankXp: number } {
+export function getLearnerRank(totalXp: number): {
+  rank: number;
+  label: string;
+  nextRankXp: number;
+} {
   const thresholds = [0, 100, 300, 600, 1000, 1500, 2200, 3000, 4000, 5200, 6600];
   let rank = 1;
   for (let i = 0; i < thresholds.length; i++) {

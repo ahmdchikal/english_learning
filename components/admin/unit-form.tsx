@@ -9,7 +9,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { unitFormSchema, type UnitFormValues } from "@/lib/validations/admin";
 import { upsertUnitAction } from "@/lib/actions/admin";
 import type { Level, Unit } from "@/types/database";
@@ -70,19 +76,19 @@ export function UnitForm({
             ))}
           </SelectContent>
         </Select>
-        {errors.level_id && <p className="text-sm text-destructive">{errors.level_id.message}</p>}
+        {errors.level_id && <p className="text-destructive text-sm">{errors.level_id.message}</p>}
       </div>
 
       <div className="space-y-2">
         <Label htmlFor="title">Judul</Label>
         <Input id="title" {...register("title")} aria-invalid={!!errors.title} />
-        {errors.title && <p className="text-sm text-destructive">{errors.title.message}</p>}
+        {errors.title && <p className="text-destructive text-sm">{errors.title.message}</p>}
       </div>
 
       <div className="space-y-2">
         <Label htmlFor="slug">Slug</Label>
         <Input id="slug" {...register("slug")} aria-invalid={!!errors.slug} />
-        {errors.slug && <p className="text-sm text-destructive">{errors.slug.message}</p>}
+        {errors.slug && <p className="text-destructive text-sm">{errors.slug.message}</p>}
       </div>
 
       <div className="space-y-2">
@@ -92,17 +98,29 @@ export function UnitForm({
 
       <div className="space-y-2">
         <Label htmlFor="order_index">Urutan</Label>
-        <Input id="order_index" type="number" {...register("order_index", { valueAsNumber: true })} />
+        <Input
+          id="order_index"
+          type="number"
+          {...register("order_index", { valueAsNumber: true })}
+        />
       </div>
 
       <div className="flex items-center justify-between">
         <Label htmlFor="force_unlocked">Buka Paksa</Label>
-        <Switch id="force_unlocked" checked={values.force_unlocked} onCheckedChange={(c) => setValue("force_unlocked", c)} />
+        <Switch
+          id="force_unlocked"
+          checked={values.force_unlocked}
+          onCheckedChange={(c) => setValue("force_unlocked", c)}
+        />
       </div>
 
       <div className="flex items-center justify-between">
         <Label htmlFor="is_published">Publikasikan</Label>
-        <Switch id="is_published" checked={values.is_published} onCheckedChange={(c) => setValue("is_published", c)} />
+        <Switch
+          id="is_published"
+          checked={values.is_published}
+          onCheckedChange={(c) => setValue("is_published", c)}
+        />
       </div>
 
       <Button type="submit" className="w-full" disabled={isSubmitting}>

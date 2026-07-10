@@ -42,7 +42,7 @@ export default async function QuizResultPage({ params }: PageProps) {
         ]}
       />
 
-      <div className="rounded-2xl border bg-card p-6 text-center shadow-sm sm:p-8">
+      <div className="bg-card rounded-2xl border p-6 text-center shadow-sm sm:p-8">
         <div
           className={cn(
             "mx-auto flex size-24 items-center justify-center rounded-full text-3xl font-extrabold",
@@ -58,32 +58,37 @@ export default async function QuizResultPage({ params }: PageProps) {
           {attempt.passed ? (
             <PartyPopper className="size-5 text-emerald-500" />
           ) : (
-            <RotateCcw className="size-5 text-muted-foreground" />
+            <RotateCcw className="text-muted-foreground size-5" />
           )}
           <h1 className="text-xl font-bold">{attempt.passed ? "Kuis Lulus!" : "Belum Lulus"}</h1>
         </div>
-        <p className="mt-1 text-muted-foreground">{getMotivationalMessage(attempt.score, attempt.passed)}</p>
+        <p className="text-muted-foreground mt-1">
+          {getMotivationalMessage(attempt.score, attempt.passed)}
+        </p>
 
         <div className="mt-6 grid grid-cols-3 gap-3 text-center">
           <div className="rounded-xl bg-emerald-50 p-3 dark:bg-emerald-500/10">
-            <p className="text-lg font-bold text-emerald-700 dark:text-emerald-300">{attempt.correct_answers}</p>
-            <p className="text-xs text-muted-foreground">Benar</p>
+            <p className="text-lg font-bold text-emerald-700 dark:text-emerald-300">
+              {attempt.correct_answers}
+            </p>
+            <p className="text-muted-foreground text-xs">Benar</p>
           </div>
-          <div className="rounded-xl bg-destructive/10 p-3">
-            <p className="text-lg font-bold text-destructive">{attempt.incorrect_answers}</p>
-            <p className="text-xs text-muted-foreground">Salah</p>
+          <div className="bg-destructive/10 rounded-xl p-3">
+            <p className="text-destructive text-lg font-bold">{attempt.incorrect_answers}</p>
+            <p className="text-muted-foreground text-xs">Salah</p>
           </div>
           <div className="rounded-xl bg-indigo-50 p-3 dark:bg-indigo-500/10">
             <p className="flex items-center justify-center gap-1 text-lg font-bold text-indigo-700 dark:text-indigo-300">
               <Sparkles className="size-4" />
               {attempt.xp_earned}
             </p>
-            <p className="text-xs text-muted-foreground">XP Diperoleh</p>
+            <p className="text-muted-foreground text-xs">XP Diperoleh</p>
           </div>
         </div>
 
-        <p className="mt-4 text-xs text-muted-foreground">
-          Skor minimal untuk lulus adalah {QUIZ_PASS_SCORE}. Skor tertinggi Anda akan selalu disimpan.
+        <p className="text-muted-foreground mt-4 text-xs">
+          Skor minimal untuk lulus adalah {QUIZ_PASS_SCORE}. Skor tertinggi Anda akan selalu
+          disimpan.
         </p>
 
         <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
@@ -106,24 +111,27 @@ export default async function QuizResultPage({ params }: PageProps) {
       </div>
 
       {incorrectAnswers.length > 0 && (
-        <div className="mt-6 rounded-2xl border bg-card p-5 shadow-sm sm:p-6">
+        <div className="bg-card mt-6 rounded-2xl border p-5 shadow-sm sm:p-6">
           <h2 className="font-semibold">Materi yang Perlu Ditinjau Kembali</h2>
           <ul className="mt-3 space-y-3">
             {incorrectAnswers.map((answer) => (
-              <li key={answer.id} className="rounded-xl bg-destructive/5 p-3">
+              <li key={answer.id} className="bg-destructive/5 rounded-xl p-3">
                 <div className="flex items-start gap-2">
-                  <XCircle className="mt-0.5 size-4 shrink-0 text-destructive" />
+                  <XCircle className="text-destructive mt-0.5 size-4 shrink-0" />
                   <div className="min-w-0">
                     <p className="text-sm font-medium">{answer.question.prompt}</p>
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      Jawaban Anda: <span className="font-medium">{answer.submitted_answer || "(kosong)"}</span>
+                    <p className="text-muted-foreground mt-1 text-xs">
+                      Jawaban Anda:{" "}
+                      <span className="font-medium">{answer.submitted_answer || "(kosong)"}</span>
                     </p>
                     <p className="text-xs text-emerald-700 dark:text-emerald-400">
                       <CheckCircle2 className="mr-1 inline size-3" />
                       Jawaban benar: {answer.question.correct_answer}
                     </p>
                     {answer.question.explanation && (
-                      <p className="mt-1 text-xs text-muted-foreground">{answer.question.explanation}</p>
+                      <p className="text-muted-foreground mt-1 text-xs">
+                        {answer.question.explanation}
+                      </p>
                     )}
                   </div>
                 </div>

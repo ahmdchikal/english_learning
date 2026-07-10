@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 
 export default function ForgotPasswordPage() {
   return (
-    <div className="space-y-6 rounded-2xl border bg-card p-6 shadow-sm sm:p-8">
+    <div className="bg-card space-y-6 rounded-2xl border p-6 shadow-sm sm:p-8">
       <div className="space-y-1 text-center">
         <h1 className="text-2xl font-bold tracking-tight">Lupa Kata Sandi?</h1>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-muted-foreground text-sm">
           Masukkan email Anda dan kami akan mengirimkan tautan untuk mengatur ulang kata sandi.
         </p>
       </div>

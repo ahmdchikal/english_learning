@@ -6,10 +6,23 @@ export interface BreadcrumbItem {
   href?: string;
 }
 
-export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
+export function Breadcrumbs({
+  items,
+  homeHref = "/dashboard",
+}: {
+  items: BreadcrumbItem[];
+  homeHref?: string;
+}) {
   return (
-    <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-1.5 text-sm text-muted-foreground">
-      <Link href="/dashboard" className="flex items-center hover:text-foreground" aria-label="Beranda">
+    <nav
+      aria-label="Breadcrumb"
+      className="text-muted-foreground mb-4 flex items-center gap-1.5 text-sm"
+    >
+      <Link
+        href={homeHref}
+        className="hover:text-foreground flex items-center"
+        aria-label="Beranda"
+      >
         <Home className="size-3.5" />
       </Link>
       {items.map((item, index) => (
@@ -20,7 +33,7 @@ export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
               {item.label}
             </Link>
           ) : (
-            <span className="font-medium text-foreground">{item.label}</span>
+            <span className="text-foreground font-medium">{item.label}</span>
           )}
         </span>
       ))}

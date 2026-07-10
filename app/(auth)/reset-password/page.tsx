@@ -9,10 +9,10 @@ export const metadata: Metadata = {
 
 export default function ResetPasswordPage() {
   return (
-    <div className="space-y-6 rounded-2xl border bg-card p-6 shadow-sm sm:p-8">
+    <div className="bg-card space-y-6 rounded-2xl border p-6 shadow-sm sm:p-8">
       <div className="space-y-1 text-center">
         <h1 className="text-2xl font-bold tracking-tight">Atur Ulang Kata Sandi</h1>
-        <p className="text-sm text-muted-foreground">Masukkan kata sandi baru untuk akun Anda.</p>
+        <p className="text-muted-foreground text-sm">Masukkan kata sandi baru untuk akun Anda.</p>
       </div>
 
       <ResetPasswordForm />

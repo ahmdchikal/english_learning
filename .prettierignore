@@ -1,0 +1,10 @@
+node_modules
+.next
+out
+build
+public
+supabase/migrations
+supabase/seed.sql
+*.md
+package-lock.json
+components/ui

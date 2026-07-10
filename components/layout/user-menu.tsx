@@ -30,7 +30,7 @@ export function UserMenu({ profile, email }: { profile: Profile | null; email: s
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex items-center gap-2 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring">
+      <DropdownMenuTrigger className="focus-visible:ring-ring flex items-center gap-2 rounded-full outline-none focus-visible:ring-2">
         <Avatar className="size-9">
           <AvatarImage src={profile?.avatar_url ?? undefined} alt={displayName} />
           <AvatarFallback className="bg-indigo-600 text-white">
@@ -51,7 +51,10 @@ export function UserMenu({ profile, email }: { profile: Profile | null; email: s
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <form action={logoutAction}>
-          <DropdownMenuItem variant="destructive" render={<button type="submit" className="w-full" />}>
+          <DropdownMenuItem
+            variant="destructive"
+            render={<button type="submit" className="w-full" />}
+          >
             <LogOut className="size-4" />
             Keluar
           </DropdownMenuItem>

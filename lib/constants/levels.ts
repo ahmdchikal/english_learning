@@ -11,8 +11,7 @@ export const PLACEMENT_SCORE_TO_LEVEL: { max: number; slug: string; label: strin
 
 export function recommendLevelFromScore(score: number) {
   return (
-    PLACEMENT_SCORE_TO_LEVEL.find((entry) => score <= entry.max) ??
-    PLACEMENT_SCORE_TO_LEVEL[0]
+    PLACEMENT_SCORE_TO_LEVEL.find((entry) => score <= entry.max) ?? PLACEMENT_SCORE_TO_LEVEL[0]
   );
 }
 

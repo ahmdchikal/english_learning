@@ -6,7 +6,14 @@ import { Pencil, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { FormDialog } from "@/components/admin/form-dialog";
 import { LevelForm } from "@/components/admin/level-form";
 import { ConfirmDialog } from "@/components/common/confirm-dialog";
@@ -23,8 +30,23 @@ export function LevelsTable({ levels }: { levels: Level[] }) {
   return (
     <div>
       <div className="mb-4 flex justify-end">
-        <FormDialog trigger={<Button><Plus className="size-4" />Tambah Level</Button>} title="Tambah Level Baru">
-          {(close) => <LevelForm onSuccess={() => { close(); refresh(); }} />}
+        <FormDialog
+          trigger={
+            <Button>
+              <Plus className="size-4" />
+              Tambah Level
+            </Button>
+          }
+          title="Tambah Level Baru"
+        >
+          {(close) => (
+            <LevelForm
+              onSuccess={() => {
+                close();
+                refresh();
+              }}
+            />
+          )}
         </FormDialog>
       </div>
 
@@ -69,12 +91,20 @@ export function LevelsTable({ levels }: { levels: Level[] }) {
                       }
                       title="Edit Level"
                     >
-                      {(close) => <LevelForm level={level} onSuccess={() => { close(); refresh(); }} />}
+                      {(close) => (
+                        <LevelForm
+                          level={level}
+                          onSuccess={() => {
+                            close();
+                            refresh();
+                          }}
+                        />
+                      )}
                     </FormDialog>
                     <ConfirmDialog
                       trigger={
                         <Button size="icon-sm" variant="ghost">
-                          <Trash2 className="size-4 text-destructive" />
+                          <Trash2 className="text-destructive size-4" />
                         </Button>
                       }
                       title={`Hapus level "${level.title}"?`}

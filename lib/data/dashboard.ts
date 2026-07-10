@@ -23,7 +23,10 @@ export interface DashboardData {
   hasAnyProgress: boolean;
 }
 
-export async function getDashboardData(userId: string, activeLevelId: string | null): Promise<DashboardData> {
+export async function getDashboardData(
+  userId: string,
+  activeLevelId: string | null
+): Promise<DashboardData> {
   const supabase = await createClient();
 
   const [progressRes, achievementsRes] = await Promise.all([
@@ -60,7 +63,11 @@ export async function getDashboardData(userId: string, activeLevelId: string | n
   let nextLesson: (Lesson & { unit: Unit | null }) | null = null;
 
   if (activeLevelId) {
-    const { data: levelData } = await supabase.from("levels").select("*").eq("id", activeLevelId).single();
+    const { data: levelData } = await supabase
+      .from("levels")
+      .select("*")
+      .eq("id", activeLevelId)
+      .single();
     activeLevel = (levelData as Level) ?? null;
 
     const { data: unitsData } = await supabase
@@ -75,21 +82,29 @@ export async function getDashboardData(userId: string, activeLevelId: string | n
       const { data: lessonsData } = await supabase
         .from("lessons")
         .select("*, unit:units(*)")
-        .in("unit_id", units.map((u) => u.id))
+        .in(
+          "unit_id",
+          units.map((u) => u.id)
+        )
         .eq("is_published", true)
         .order("order_index", { ascending: true });
       const lessons = (lessonsData as (Lesson & { unit: Unit })[]) ?? [];
 
       const progressByLesson = new Map(allProgress.map((p) => [p.lesson_id, p]));
-      const completedCount = lessons.filter((l) => progressByLesson.get(l.id)?.status === "completed").length;
-      levelProgressPercent = lessons.length > 0 ? Math.round((completedCount / lessons.length) * 100) : 0;
+      const completedCount = lessons.filter(
+        (l) => progressByLesson.get(l.id)?.status === "completed"
+      ).length;
+      levelProgressPercent =
+        lessons.length > 0 ? Math.round((completedCount / lessons.length) * 100) : 0;
       incompleteLessonsCount = lessons.length - completedCount;
 
       const sortedByUnitThenOrder = [...lessons].sort((a, b) => {
         const unitDiff = (a.unit?.order_index ?? 0) - (b.unit?.order_index ?? 0);
         return unitDiff !== 0 ? unitDiff : a.order_index - b.order_index;
       });
-      nextLesson = sortedByUnitThenOrder.find((l) => progressByLesson.get(l.id)?.status !== "completed") ?? null;
+      nextLesson =
+        sortedByUnitThenOrder.find((l) => progressByLesson.get(l.id)?.status !== "completed") ??
+        null;
 
       const mostRecentProgress = allProgress.find((p) => lessons.some((l) => l.id === p.lesson_id));
       if (mostRecentProgress) {
@@ -101,11 +116,15 @@ export async function getDashboardData(userId: string, activeLevelId: string | n
   const scoredProgress = allProgress.filter((p) => typeof p.best_quiz_score === "number");
   const averageQuizScore =
     scoredProgress.length > 0
-      ? Math.round(scoredProgress.reduce((sum, p) => sum + (p.best_quiz_score ?? 0), 0) / scoredProgress.length)
+      ? Math.round(
+          scoredProgress.reduce((sum, p) => sum + (p.best_quiz_score ?? 0), 0) /
+            scoredProgress.length
+        )
       : 0;
   const totalLessonsCompleted = allProgress.filter((p) => p.status === "completed").length;
 
-  const latestBadgeRow = achievementsRes.data?.[0] as (UserAchievement & { achievement: Achievement }) | undefined;
+  const latestBadgeRow = achievementsRes.data?.[0] as
+    (UserAchievement & { achievement: Achievement }) | undefined;
 
   return {
     activeLevel,

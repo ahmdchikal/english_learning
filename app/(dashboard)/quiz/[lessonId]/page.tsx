@@ -35,8 +35,8 @@ export default async function QuizPage({ params }: PageProps) {
   if (!unlocked) {
     return (
       <PageContainer>
-        <div className="flex flex-col items-center gap-4 rounded-2xl border border-dashed bg-muted/30 px-6 py-16 text-center">
-          <Lock className="size-10 text-muted-foreground" />
+        <div className="bg-muted/30 flex flex-col items-center gap-4 rounded-2xl border border-dashed px-6 py-16 text-center">
+          <Lock className="text-muted-foreground size-10" />
           <h1 className="text-xl font-semibold">Pelajaran ini masih terkunci</h1>
           <LinkButton href="/learn">Kembali ke Daftar Belajar</LinkButton>
         </div>
@@ -47,10 +47,10 @@ export default async function QuizPage({ params }: PageProps) {
   if (quizQuestions.length === 0) {
     return (
       <PageContainer>
-        <div className="flex flex-col items-center gap-4 rounded-2xl border border-dashed bg-muted/30 px-6 py-16 text-center">
-          <ListChecks className="size-10 text-muted-foreground" />
+        <div className="bg-muted/30 flex flex-col items-center gap-4 rounded-2xl border border-dashed px-6 py-16 text-center">
+          <ListChecks className="text-muted-foreground size-10" />
           <h1 className="text-xl font-semibold">Kuis belum tersedia</h1>
-          <p className="max-w-sm text-sm text-muted-foreground">
+          <p className="text-muted-foreground max-w-sm text-sm">
             Soal untuk pelajaran ini belum ditambahkan oleh administrator.
           </p>
           <LinkButton href={`/lesson/${lesson.id}`}>Kembali ke Pelajaran</LinkButton>
@@ -71,9 +71,9 @@ export default async function QuizPage({ params }: PageProps) {
         ]}
       />
 
-      <div className="mb-6 rounded-2xl border bg-card p-5 shadow-sm sm:p-6">
+      <div className="bg-card mb-6 rounded-2xl border p-5 shadow-sm sm:p-6">
         <h1 className="text-xl font-bold">Kuis: {lesson.title}</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
+        <p className="text-muted-foreground mt-1 text-sm">
           {quizQuestions.length} soal · Skor minimal untuk lulus: {QUIZ_PASS_SCORE}
         </p>
       </div>

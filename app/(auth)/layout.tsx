@@ -4,9 +4,9 @@ import { siteConfig } from "@/lib/constants/site";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen flex-col bg-gradient-to-b from-indigo-50 via-white to-white dark:from-indigo-950/20 dark:via-background dark:to-background">
+    <div className="dark:via-background dark:to-background flex min-h-screen flex-col bg-gradient-to-b from-indigo-50 via-white to-white dark:from-indigo-950/20">
       <header className="px-4 py-6 sm:px-6">
-        <Link href="/" className="inline-flex items-center gap-2 font-bold text-lg">
+        <Link href="/" className="inline-flex items-center gap-2 text-lg font-bold">
           <span className="flex size-8 items-center justify-center rounded-xl bg-indigo-600 text-white">
             <GraduationCap className="size-5" />
           </span>

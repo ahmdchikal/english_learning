@@ -45,19 +45,21 @@ export function PlacementTestEngine({ questions }: { questions: PlacementQuestio
 
   if (result) {
     return (
-      <div className="rounded-2xl border bg-card p-6 text-center shadow-sm sm:p-8">
+      <div className="bg-card rounded-2xl border p-6 text-center shadow-sm sm:p-8">
         <CheckCircle2 className="mx-auto size-12 text-emerald-500" />
         <h2 className="mt-4 text-xl font-bold">Tes Selesai!</h2>
-        <p className="mt-2 text-muted-foreground">
-          Skor Anda: <span className="font-semibold text-foreground">{result.score}</span>
+        <p className="text-muted-foreground mt-2">
+          Skor Anda: <span className="text-foreground font-semibold">{result.score}</span>
         </p>
         <div className="mt-4 rounded-xl bg-indigo-50 p-4 dark:bg-indigo-500/10">
-          <p className="text-sm text-indigo-700 dark:text-indigo-300">Rekomendasi level untuk Anda:</p>
+          <p className="text-sm text-indigo-700 dark:text-indigo-300">
+            Rekomendasi level untuk Anda:
+          </p>
           <p className="mt-1 text-2xl font-bold text-indigo-700 dark:text-indigo-300">
             {result.recommended_level_name}
           </p>
         </div>
-        <p className="mt-4 flex items-start gap-2 rounded-xl bg-muted/50 p-3 text-left text-xs text-muted-foreground">
+        <p className="bg-muted/50 text-muted-foreground mt-4 flex items-start gap-2 rounded-xl p-3 text-left text-xs">
           <Info className="mt-0.5 size-4 shrink-0" />
           Hasil ini hanya rekomendasi awal. Anda tetap dapat memulai dari level Pre-A1 atau memilih
           level lain sesuai kenyamanan Anda.
@@ -77,17 +79,23 @@ export function PlacementTestEngine({ questions }: { questions: PlacementQuestio
 
   return (
     <div>
-      <div className="mb-2 flex items-center justify-between text-sm text-muted-foreground">
+      <div className="text-muted-foreground mb-2 flex items-center justify-between text-sm">
         <span>
           Soal {index + 1} dari {questions.length}
         </span>
         <span>{Math.round(((index + 1) / questions.length) * 100)}%</span>
       </div>
-      <Progress value={((index + 1) / questions.length) * 100} indicatorClassName="bg-indigo-600" className="mb-6" />
+      <Progress
+        value={((index + 1) / questions.length) * 100}
+        indicatorClassName="bg-indigo-600"
+        className="mb-6"
+      />
 
-      <div className="rounded-2xl border bg-card p-5 shadow-sm sm:p-6">
+      <div className="bg-card rounded-2xl border p-5 shadow-sm sm:p-6">
         <p className="text-lg font-semibold">{question.prompt}</p>
-        {question.instruction && <p className="mt-1 text-sm text-muted-foreground">{question.instruction}</p>}
+        {question.instruction && (
+          <p className="text-muted-foreground mt-1 text-sm">{question.instruction}</p>
+        )}
 
         <RadioGroup
           value={selected}
@@ -98,7 +106,7 @@ export function PlacementTestEngine({ questions }: { questions: PlacementQuestio
             <Label
               key={option.id}
               htmlFor={option.id}
-              className="flex cursor-pointer items-center gap-3 rounded-xl border p-3 hover:bg-muted/50 data-checked:border-indigo-500 data-checked:bg-indigo-50 dark:data-checked:bg-indigo-500/10"
+              className="hover:bg-muted/50 flex cursor-pointer items-center gap-3 rounded-xl border p-3 data-checked:border-indigo-500 data-checked:bg-indigo-50 dark:data-checked:bg-indigo-500/10"
               data-checked={selected === option.option_text || undefined}
             >
               <RadioGroupItem value={option.option_text} id={option.id} />

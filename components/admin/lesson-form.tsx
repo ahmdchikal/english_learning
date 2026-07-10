@@ -9,7 +9,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { lessonFormSchema, type LessonFormValues } from "@/lib/validations/admin";
 import { upsertLessonAction } from "@/lib/actions/admin";
 import type { Lesson, Unit } from "@/types/database";
@@ -76,19 +82,19 @@ export function LessonForm({
             ))}
           </SelectContent>
         </Select>
-        {errors.unit_id && <p className="text-sm text-destructive">{errors.unit_id.message}</p>}
+        {errors.unit_id && <p className="text-destructive text-sm">{errors.unit_id.message}</p>}
       </div>
 
       <div className="space-y-2">
         <Label htmlFor="title">Judul</Label>
         <Input id="title" {...register("title")} aria-invalid={!!errors.title} />
-        {errors.title && <p className="text-sm text-destructive">{errors.title.message}</p>}
+        {errors.title && <p className="text-destructive text-sm">{errors.title.message}</p>}
       </div>
 
       <div className="space-y-2">
         <Label htmlFor="slug">Slug</Label>
         <Input id="slug" {...register("slug")} aria-invalid={!!errors.slug} />
-        {errors.slug && <p className="text-sm text-destructive">{errors.slug.message}</p>}
+        {errors.slug && <p className="text-destructive text-sm">{errors.slug.message}</p>}
       </div>
 
       <div className="space-y-2">
@@ -105,7 +111,10 @@ export function LessonForm({
           onChange={(e) =>
             setValue(
               "learning_objectives",
-              e.target.value.split("\n").map((s) => s.trim()).filter(Boolean)
+              e.target.value
+                .split("\n")
+                .map((s) => s.trim())
+                .filter(Boolean)
             )
           }
         />
@@ -129,7 +138,11 @@ export function LessonForm({
       <div className="grid gap-4 sm:grid-cols-3">
         <div className="space-y-2">
           <Label htmlFor="estimated_minutes">Estimasi (menit)</Label>
-          <Input id="estimated_minutes" type="number" {...register("estimated_minutes", { valueAsNumber: true })} />
+          <Input
+            id="estimated_minutes"
+            type="number"
+            {...register("estimated_minutes", { valueAsNumber: true })}
+          />
         </div>
         <div className="space-y-2">
           <Label htmlFor="xp_reward">XP</Label>
@@ -137,18 +150,30 @@ export function LessonForm({
         </div>
         <div className="space-y-2">
           <Label htmlFor="order_index">Urutan</Label>
-          <Input id="order_index" type="number" {...register("order_index", { valueAsNumber: true })} />
+          <Input
+            id="order_index"
+            type="number"
+            {...register("order_index", { valueAsNumber: true })}
+          />
         </div>
       </div>
 
       <div className="flex items-center justify-between">
         <Label htmlFor="force_unlocked">Buka Paksa</Label>
-        <Switch id="force_unlocked" checked={values.force_unlocked} onCheckedChange={(c) => setValue("force_unlocked", c)} />
+        <Switch
+          id="force_unlocked"
+          checked={values.force_unlocked}
+          onCheckedChange={(c) => setValue("force_unlocked", c)}
+        />
       </div>
 
       <div className="flex items-center justify-between">
         <Label htmlFor="is_published">Publikasikan</Label>
-        <Switch id="is_published" checked={values.is_published} onCheckedChange={(c) => setValue("is_published", c)} />
+        <Switch
+          id="is_published"
+          checked={values.is_published}
+          onCheckedChange={(c) => setValue("is_published", c)}
+        />
       </div>
 
       <Button type="submit" className="w-full" disabled={isSubmitting}>

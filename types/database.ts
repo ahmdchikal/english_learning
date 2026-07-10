@@ -16,11 +16,7 @@ export type QuestionType =
   | "speaking"
   | "true_false";
 export type QuestionDifficulty =
-  | "beginner"
-  | "elementary"
-  | "intermediate"
-  | "upper_intermediate"
-  | "advanced";
+  "beginner" | "elementary" | "intermediate" | "upper_intermediate" | "advanced";
 export type AchievementRequirementType =
   | "lessons_completed"
   | "quiz_perfect"

@@ -27,28 +27,51 @@ export default async function ProgressPage() {
 
   return (
     <PageContainer>
-      <PageHeader title="Progres Belajar" description="Pantau perkembangan belajar Bahasa Inggris Anda." />
+      <PageHeader
+        title="Progres Belajar"
+        description="Pantau perkembangan belajar Bahasa Inggris Anda."
+      />
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <StatCard icon={BookOpenCheck} label="Pelajaran Selesai" value={data.totalLessonsCompleted} accent="indigo" />
-        <StatCard icon={TrendingUp} label="Rata-rata Skor Kuis" value={data.averageQuizScore} accent="emerald" />
-        <StatCard icon={Mic} label="Skor Berbicara Tertinggi" value={data.highestSpeakingScore} accent="rose" />
-        <StatCard icon={Flame} label="Streak Terpanjang" value={`${data.longestStreak} hari`} accent="orange" />
+        <StatCard
+          icon={BookOpenCheck}
+          label="Pelajaran Selesai"
+          value={data.totalLessonsCompleted}
+          accent="indigo"
+        />
+        <StatCard
+          icon={TrendingUp}
+          label="Rata-rata Skor Kuis"
+          value={data.averageQuizScore}
+          accent="emerald"
+        />
+        <StatCard
+          icon={Mic}
+          label="Skor Berbicara Tertinggi"
+          value={data.highestSpeakingScore}
+          accent="rose"
+        />
+        <StatCard
+          icon={Flame}
+          label="Streak Terpanjang"
+          value={`${data.longestStreak} hari`}
+          accent="orange"
+        />
       </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
-        <div className="rounded-2xl border bg-card p-5 shadow-sm sm:p-6">
+        <div className="bg-card rounded-2xl border p-5 shadow-sm sm:p-6">
           <h2 className="font-semibold">XP 7 Hari Terakhir</h2>
           <WeeklyXpChart activities={data.recentActivities} />
         </div>
-        <div className="rounded-2xl border bg-card p-5 shadow-sm sm:p-6">
+        <div className="bg-card rounded-2xl border p-5 shadow-sm sm:p-6">
           <h2 className="font-semibold">Waktu Belajar (30 Hari)</h2>
           <StudyTimeChart activities={data.recentActivities} days={30} />
         </div>
       </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-3">
-        <div className="lg:col-span-2 rounded-2xl border bg-card p-5 shadow-sm sm:p-6">
+        <div className="bg-card rounded-2xl border p-5 shadow-sm sm:p-6 lg:col-span-2">
           <h2 className="font-semibold">Progres Setiap Level</h2>
           <div className="mt-4 space-y-4">
             {data.levels.map((level) => (
@@ -61,18 +84,22 @@ export default async function ProgressPage() {
                     {level.completedLessons}/{level.totalLessons}
                   </span>
                 </div>
-                <Progress value={level.progressPercent} indicatorClassName="bg-emerald-500" className="mt-1.5" />
+                <Progress
+                  value={level.progressPercent}
+                  indicatorClassName="bg-emerald-500"
+                  className="mt-1.5"
+                />
               </div>
             ))}
           </div>
         </div>
 
-        <div className="rounded-2xl border bg-card p-5 shadow-sm">
+        <div className="bg-card rounded-2xl border p-5 shadow-sm">
           <h2 className="font-semibold">Kalender Aktivitas</h2>
           <div className="mt-3">
             <ActivityCalendar activities={data.recentActivities} days={30} />
           </div>
-          <div className="mt-3 flex items-center gap-2 text-xs text-muted-foreground">
+          <div className="text-muted-foreground mt-3 flex items-center gap-2 text-xs">
             <Target className="size-3.5" />
             Semakin hijau, semakin lama Anda belajar hari itu.
           </div>
@@ -80,18 +107,27 @@ export default async function ProgressPage() {
       </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
-        <div className="rounded-2xl border bg-card p-5 shadow-sm sm:p-6">
+        <div className="bg-card rounded-2xl border p-5 shadow-sm sm:p-6">
           <h2 className="font-semibold">Riwayat Aktivitas Terbaru</h2>
           {data.recentActivities.length === 0 ? (
-            <EmptyState icon={TrendingUp} title="Belum ada aktivitas" description="Mulai belajar untuk melihat riwayat di sini." />
+            <EmptyState
+              icon={TrendingUp}
+              title="Belum ada aktivitas"
+              description="Mulai belajar untuk melihat riwayat di sini."
+            />
           ) : (
             <ul className="mt-3 divide-y">
               {[...data.recentActivities]
                 .reverse()
                 .slice(0, 10)
                 .map((activity) => (
-                  <li key={activity.id} className="flex items-center justify-between py-2.5 text-sm">
-                    <span className="text-muted-foreground">{formatDate(activity.activity_date)}</span>
+                  <li
+                    key={activity.id}
+                    className="flex items-center justify-between py-2.5 text-sm"
+                  >
+                    <span className="text-muted-foreground">
+                      {formatDate(activity.activity_date)}
+                    </span>
                     <span>
                       {activity.minutes_learned} menit · {activity.lessons_completed} pelajaran ·{" "}
                       {activity.xp_earned} XP
@@ -102,7 +138,7 @@ export default async function ProgressPage() {
           )}
         </div>
 
-        <div className="rounded-2xl border bg-card p-5 shadow-sm sm:p-6">
+        <div className="bg-card rounded-2xl border p-5 shadow-sm sm:p-6">
           <h2 className="font-semibold">Perlu Ditingkatkan</h2>
           {data.improvementAreas.length === 0 ? (
             <EmptyState
@@ -115,10 +151,10 @@ export default async function ProgressPage() {
               {data.improvementAreas.map((area) => (
                 <li
                   key={area.lessonId}
-                  className="flex items-center justify-between rounded-xl bg-destructive/5 px-3 py-2 text-sm"
+                  className="bg-destructive/5 flex items-center justify-between rounded-xl px-3 py-2 text-sm"
                 >
                   <span>{area.lessonTitle}</span>
-                  <span className="font-medium text-destructive">{area.incorrectCount}x salah</span>
+                  <span className="text-destructive font-medium">{area.incorrectCount}x salah</span>
                 </li>
               ))}
             </ul>

@@ -10,12 +10,22 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { questionFormSchema, type QuestionFormValues } from "@/lib/validations/admin";
 import { upsertQuestionAction } from "@/lib/actions/admin";
 import type { Lesson, Question, QuestionOption } from "@/types/database";
 
-const QUESTION_TYPES: { value: QuestionFormValues["type"]; label: string; needsOptions: boolean }[] = [
+const QUESTION_TYPES: {
+  value: QuestionFormValues["type"];
+  label: string;
+  needsOptions: boolean;
+}[] = [
   { value: "multiple_choice", label: "Pilihan Ganda", needsOptions: true },
   { value: "fill_blank", label: "Isian Singkat", needsOptions: false },
   { value: "sentence_arrangement", label: "Susun Kalimat", needsOptions: false },
@@ -63,11 +73,13 @@ export function QuestionForm({
       difficulty: question?.difficulty ?? "beginner",
       order_index: question?.order_index ?? 0,
       points: question?.points ?? 1,
-      options:
-        question?.options.map((o) => ({ option_text: o.option_text, is_correct: o.is_correct })) ?? [
-          { option_text: "", is_correct: true },
-          { option_text: "", is_correct: false },
-        ],
+      options: question?.options.map((o) => ({
+        option_text: o.option_text,
+        is_correct: o.is_correct,
+      })) ?? [
+        { option_text: "", is_correct: true },
+        { option_text: "", is_correct: false },
+      ],
     },
   });
 
@@ -104,7 +116,10 @@ export function QuestionForm({
       {!values.is_placement_question && (
         <div className="space-y-2">
           <Label htmlFor="lesson_id">Pelajaran</Label>
-          <Select value={values.lesson_id ?? ""} onValueChange={(v) => setValue("lesson_id", v || null)}>
+          <Select
+            value={values.lesson_id ?? ""}
+            onValueChange={(v) => setValue("lesson_id", v || null)}
+          >
             <SelectTrigger id="lesson_id" className="w-full">
               <SelectValue placeholder="Pilih pelajaran" />
             </SelectTrigger>
@@ -116,14 +131,17 @@ export function QuestionForm({
               ))}
             </SelectContent>
           </Select>
-          {errors.lesson_id && <p className="text-sm text-destructive">Pelajaran wajib dipilih.</p>}
+          {errors.lesson_id && <p className="text-destructive text-sm">Pelajaran wajib dipilih.</p>}
         </div>
       )}
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="type">Tipe Soal</Label>
-          <Select value={values.type} onValueChange={(v) => v && setValue("type", v as QuestionFormValues["type"])}>
+          <Select
+            value={values.type}
+            onValueChange={(v) => v && setValue("type", v as QuestionFormValues["type"])}
+          >
             <SelectTrigger id="type" className="w-full">
               <SelectValue />
             </SelectTrigger>
@@ -140,7 +158,9 @@ export function QuestionForm({
           <Label htmlFor="difficulty">Tingkat Kesulitan</Label>
           <Select
             value={values.difficulty}
-            onValueChange={(v) => v && setValue("difficulty", v as QuestionFormValues["difficulty"])}
+            onValueChange={(v) =>
+              v && setValue("difficulty", v as QuestionFormValues["difficulty"])
+            }
           >
             <SelectTrigger id="difficulty" className="w-full">
               <SelectValue />
@@ -159,7 +179,7 @@ export function QuestionForm({
       <div className="space-y-2">
         <Label htmlFor="prompt">Pertanyaan / Prompt</Label>
         <Textarea id="prompt" rows={2} {...register("prompt")} aria-invalid={!!errors.prompt} />
-        {errors.prompt && <p className="text-sm text-destructive">{errors.prompt.message}</p>}
+        {errors.prompt && <p className="text-destructive text-sm">{errors.prompt.message}</p>}
       </div>
 
       <div className="space-y-2">
@@ -176,10 +196,16 @@ export function QuestionForm({
 
       <div className="space-y-2">
         <Label htmlFor="correct_answer">Jawaban Benar</Label>
-        <Input id="correct_answer" {...register("correct_answer")} aria-invalid={!!errors.correct_answer} />
-        {errors.correct_answer && <p className="text-sm text-destructive">{errors.correct_answer.message}</p>}
+        <Input
+          id="correct_answer"
+          {...register("correct_answer")}
+          aria-invalid={!!errors.correct_answer}
+        />
+        {errors.correct_answer && (
+          <p className="text-destructive text-sm">{errors.correct_answer.message}</p>
+        )}
         {selectedType === "matching" && (
-          <p className="text-xs text-muted-foreground">Format: kata=arti (contoh: hello=halo)</p>
+          <p className="text-muted-foreground text-xs">Format: kata=arti (contoh: hello=halo)</p>
         )}
       </div>
 
@@ -196,7 +222,9 @@ export function QuestionForm({
               <div key={field.id} className="flex items-center gap-2">
                 <Checkbox
                   checked={values.options?.[index]?.is_correct ?? false}
-                  onCheckedChange={(checked) => setValue(`options.${index}.is_correct`, Boolean(checked))}
+                  onCheckedChange={(checked) =>
+                    setValue(`options.${index}.is_correct`, Boolean(checked))
+                  }
                 />
                 <Input
                   {...register(`options.${index}.option_text`)}
@@ -204,12 +232,17 @@ export function QuestionForm({
                   className="flex-1"
                 />
                 <Button type="button" size="icon-sm" variant="ghost" onClick={() => remove(index)}>
-                  <Trash2 className="size-4 text-destructive" />
+                  <Trash2 className="text-destructive size-4" />
                 </Button>
               </div>
             ))}
           </div>
-          <Button type="button" size="sm" variant="outline" onClick={() => append({ option_text: "", is_correct: false })}>
+          <Button
+            type="button"
+            size="sm"
+            variant="outline"
+            onClick={() => append({ option_text: "", is_correct: false })}
+          >
             <Plus className="size-4" />
             Tambah Pilihan
           </Button>
@@ -219,7 +252,11 @@ export function QuestionForm({
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="order_index">Urutan</Label>
-          <Input id="order_index" type="number" {...register("order_index", { valueAsNumber: true })} />
+          <Input
+            id="order_index"
+            type="number"
+            {...register("order_index", { valueAsNumber: true })}
+          />
         </div>
         <div className="space-y-2">
           <Label htmlFor="points">Poin</Label>

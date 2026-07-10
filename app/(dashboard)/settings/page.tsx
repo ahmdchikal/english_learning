@@ -20,10 +20,13 @@ export default async function SettingsPage() {
 
   return (
     <PageContainer className="max-w-2xl">
-      <PageHeader title="Pengaturan" description="Sesuaikan preferensi belajar dan keamanan akun Anda." />
+      <PageHeader
+        title="Pengaturan"
+        description="Sesuaikan preferensi belajar dan keamanan akun Anda."
+      />
 
       <div className="space-y-6">
-        <div className="rounded-2xl border bg-card p-5 shadow-sm sm:p-6">
+        <div className="bg-card rounded-2xl border p-5 shadow-sm sm:p-6">
           <h2 className="mb-4 font-semibold">Preferensi</h2>
           <SettingsForm
             soundEnabled={profile?.sound_enabled ?? true}
@@ -32,7 +35,7 @@ export default async function SettingsPage() {
           />
         </div>
 
-        <div className="rounded-2xl border bg-card p-5 shadow-sm sm:p-6">
+        <div className="bg-card rounded-2xl border p-5 shadow-sm sm:p-6">
           <h2 className="mb-4 font-semibold">Keamanan</h2>
           <ChangePasswordForm />
         </div>

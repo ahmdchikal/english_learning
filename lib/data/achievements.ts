@@ -9,13 +9,17 @@ export interface AchievementWithStatus extends Achievement {
 export async function getAchievementsForUser(userId: string): Promise<AchievementWithStatus[]> {
   const supabase = await createClient();
 
-  const [{ data: achievementsData }, { data: earnedData }, { data: profileData }, { data: progressData }] =
-    await Promise.all([
-      supabase.from("achievements").select("*").order("requirement_value", { ascending: true }),
-      supabase.from("user_achievements").select("*").eq("user_id", userId),
-      supabase.from("profiles").select("longest_streak").eq("id", userId).single(),
-      supabase.from("user_lesson_progress").select("*").eq("user_id", userId),
-    ]);
+  const [
+    { data: achievementsData },
+    { data: earnedData },
+    { data: profileData },
+    { data: progressData },
+  ] = await Promise.all([
+    supabase.from("achievements").select("*").order("requirement_value", { ascending: true }),
+    supabase.from("user_achievements").select("*").eq("user_id", userId),
+    supabase.from("profiles").select("longest_streak").eq("id", userId).single(),
+    supabase.from("user_lesson_progress").select("*").eq("user_id", userId),
+  ]);
 
   const achievements = (achievementsData as Achievement[]) ?? [];
   const earned = (earnedData as UserAchievement[]) ?? [];
@@ -25,7 +29,10 @@ export async function getAchievementsForUser(userId: string): Promise<Achievemen
   const { data: vocabCountsData } = await supabase
     .from("vocabulary")
     .select("lesson_id")
-    .in("lesson_id", progress.filter((p) => p.status === "completed").map((p) => p.lesson_id));
+    .in(
+      "lesson_id",
+      progress.filter((p) => p.status === "completed").map((p) => p.lesson_id)
+    );
   const vocabularyCompleted = (vocabCountsData as { lesson_id: string }[])?.length ?? 0;
 
   const { data: perfectAttempts } = await supabase

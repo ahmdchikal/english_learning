@@ -20,7 +20,12 @@ export function SpeakingPractice({
   initialBestScore?: number | null;
 }) {
   const { isSupported: ttsSupported, play, isSpeaking } = useTextToSpeech();
-  const { isSupported: sttSupported, isListening, listen, error: sttError } = useSpeechRecognition();
+  const {
+    isSupported: sttSupported,
+    isListening,
+    listen,
+    error: sttError,
+  } = useSpeechRecognition();
 
   const [transcript, setTranscript] = useState<string | null>(null);
   const [result, setResult] = useState<SpeakingScoreResult | null>(null);
@@ -58,7 +63,7 @@ export function SpeakingPractice({
   }
 
   return (
-    <div className="rounded-2xl border bg-card p-5 shadow-sm sm:p-6">
+    <div className="bg-card rounded-2xl border p-5 shadow-sm sm:p-6">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h3 className="font-semibold">Latihan Berbicara</h3>
         {bestScore !== null && (
@@ -69,10 +74,17 @@ export function SpeakingPractice({
         )}
       </div>
 
-      <p className="mt-3 rounded-xl bg-muted/50 p-4 text-center text-lg font-medium">{targetText}</p>
+      <p className="bg-muted/50 mt-3 rounded-xl p-4 text-center text-lg font-medium">
+        {targetText}
+      </p>
 
       <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
-        <Button type="button" variant="outline" onClick={() => play(targetText)} disabled={!ttsSupported}>
+        <Button
+          type="button"
+          variant="outline"
+          onClick={() => play(targetText)}
+          disabled={!ttsSupported}
+        >
           <Volume2 className={cn("size-4", isSpeaking && "animate-pulse")} />
           Dengarkan
         </Button>
@@ -91,7 +103,7 @@ export function SpeakingPractice({
       </div>
 
       {sttError && (
-        <p className="mt-3 flex items-center justify-center gap-2 text-sm text-destructive">
+        <p className="text-destructive mt-3 flex items-center justify-center gap-2 text-sm">
           <AlertTriangle className="size-4" />
           {sttError}
         </p>
@@ -132,7 +144,9 @@ export function SpeakingPractice({
           </div>
 
           {transcript && (
-            <p className="text-center text-xs text-muted-foreground">Anda mengucapkan: &ldquo;{transcript}&rdquo;</p>
+            <p className="text-muted-foreground text-center text-xs">
+              Anda mengucapkan: &ldquo;{transcript}&rdquo;
+            </p>
           )}
 
           <div className="flex justify-center">

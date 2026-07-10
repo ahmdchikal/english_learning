@@ -1,4 +1,13 @@
-import { Award, Footprints, Star, Flame, BookOpen, Mic, GraduationCap, type LucideIcon } from "lucide-react";
+import {
+  Award,
+  Footprints,
+  Star,
+  Flame,
+  BookOpen,
+  Mic,
+  GraduationCap,
+  type LucideIcon,
+} from "lucide-react";
 
 const ICONS: Record<string, LucideIcon> = {
   footprints: Footprints,

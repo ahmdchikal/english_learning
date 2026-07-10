@@ -50,13 +50,16 @@ export function LoginForm() {
           aria-invalid={!!errors.email}
           {...register("email")}
         />
-        {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
+        {errors.email && <p className="text-destructive text-sm">{errors.email.message}</p>}
       </div>
 
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <Label htmlFor="password">Kata Sandi</Label>
-          <Link href="/forgot-password" className="text-xs font-medium text-indigo-600 hover:underline dark:text-indigo-400">
+          <Link
+            href="/forgot-password"
+            className="text-xs font-medium text-indigo-600 hover:underline dark:text-indigo-400"
+          >
             Lupa kata sandi?
           </Link>
         </div>
@@ -67,7 +70,7 @@ export function LoginForm() {
           aria-invalid={!!errors.password}
           {...register("password")}
         />
-        {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
+        {errors.password && <p className="text-destructive text-sm">{errors.password.message}</p>}
       </div>
 
       <Button type="submit" className="w-full" disabled={isSubmitting}>

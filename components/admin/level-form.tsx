@@ -53,25 +53,27 @@ export function LevelForm({ level, onSuccess }: { level?: Level; onSuccess: () =
         <div className="space-y-2">
           <Label htmlFor="name">Nama</Label>
           <Input id="name" {...register("name")} aria-invalid={!!errors.name} />
-          {errors.name && <p className="text-sm text-destructive">{errors.name.message}</p>}
+          {errors.name && <p className="text-destructive text-sm">{errors.name.message}</p>}
         </div>
         <div className="space-y-2">
           <Label htmlFor="cefr_code">Kode CEFR</Label>
           <Input id="cefr_code" {...register("cefr_code")} aria-invalid={!!errors.cefr_code} />
-          {errors.cefr_code && <p className="text-sm text-destructive">{errors.cefr_code.message}</p>}
+          {errors.cefr_code && (
+            <p className="text-destructive text-sm">{errors.cefr_code.message}</p>
+          )}
         </div>
       </div>
 
       <div className="space-y-2">
         <Label htmlFor="title">Judul</Label>
         <Input id="title" {...register("title")} aria-invalid={!!errors.title} />
-        {errors.title && <p className="text-sm text-destructive">{errors.title.message}</p>}
+        {errors.title && <p className="text-destructive text-sm">{errors.title.message}</p>}
       </div>
 
       <div className="space-y-2">
         <Label htmlFor="slug">Slug</Label>
         <Input id="slug" {...register("slug")} aria-invalid={!!errors.slug} />
-        {errors.slug && <p className="text-sm text-destructive">{errors.slug.message}</p>}
+        {errors.slug && <p className="text-destructive text-sm">{errors.slug.message}</p>}
       </div>
 
       <div className="space-y-2">
@@ -82,11 +84,19 @@ export function LevelForm({ level, onSuccess }: { level?: Level; onSuccess: () =
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="order_index">Urutan</Label>
-          <Input id="order_index" type="number" {...register("order_index", { valueAsNumber: true })} />
+          <Input
+            id="order_index"
+            type="number"
+            {...register("order_index", { valueAsNumber: true })}
+          />
         </div>
         <div className="space-y-2">
           <Label htmlFor="required_xp">XP Minimum</Label>
-          <Input id="required_xp" type="number" {...register("required_xp", { valueAsNumber: true })} />
+          <Input
+            id="required_xp"
+            type="number"
+            {...register("required_xp", { valueAsNumber: true })}
+          />
         </div>
       </div>
 

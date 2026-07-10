@@ -21,11 +21,11 @@ export function PracticeExercises({ questions }: { questions: QuestionWithOption
         const correct = isChecked && isAnswerCorrect(question, value);
 
         return (
-          <div key={question.id} className="rounded-2xl border bg-card p-4 shadow-sm sm:p-5">
-            <p className="text-xs font-medium text-muted-foreground">Latihan {index + 1}</p>
+          <div key={question.id} className="bg-card rounded-2xl border p-4 shadow-sm sm:p-5">
+            <p className="text-muted-foreground text-xs font-medium">Latihan {index + 1}</p>
             <p className="mt-1 font-medium">{question.prompt}</p>
             {question.instruction && (
-              <p className="mt-1 text-sm text-muted-foreground">{question.instruction}</p>
+              <p className="text-muted-foreground mt-1 text-sm">{question.instruction}</p>
             )}
 
             <div className="mt-3">
@@ -43,7 +43,7 @@ export function PracticeExercises({ questions }: { questions: QuestionWithOption
                 className={
                   correct
                     ? "mt-3 flex items-start gap-2 rounded-xl bg-emerald-50 p-3 text-sm text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300"
-                    : "mt-3 flex items-start gap-2 rounded-xl bg-destructive/10 p-3 text-sm text-destructive"
+                    : "bg-destructive/10 text-destructive mt-3 flex items-start gap-2 rounded-xl p-3 text-sm"
                 }
               >
                 {correct ? (
@@ -53,9 +53,13 @@ export function PracticeExercises({ questions }: { questions: QuestionWithOption
                 )}
                 <div>
                   <p className="font-medium">
-                    {correct ? "Benar!" : `Kurang tepat. Jawaban yang benar: ${question.correct_answer}`}
+                    {correct
+                      ? "Benar!"
+                      : `Kurang tepat. Jawaban yang benar: ${question.correct_answer}`}
                   </p>
-                  {question.explanation && <p className="mt-0.5 opacity-90">{question.explanation}</p>}
+                  {question.explanation && (
+                    <p className="mt-0.5 opacity-90">{question.explanation}</p>
+                  )}
                 </div>
               </div>
             )}

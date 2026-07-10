@@ -16,7 +16,7 @@ export function SpeakingPracticeHub({ questions }: { questions: SpeakingQuestion
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
-        <p className="text-sm text-muted-foreground">{question.lesson?.title}</p>
+        <p className="text-muted-foreground text-sm">{question.lesson?.title}</p>
         <Button
           type="button"
           variant="outline"
@@ -31,7 +31,11 @@ export function SpeakingPracticeHub({ questions }: { questions: SpeakingQuestion
         </Button>
       </div>
 
-      <SpeakingPractice key={question.id} lessonId={question.lesson_id ?? ""} targetText={question.prompt} />
+      <SpeakingPractice
+        key={question.id}
+        lessonId={question.lesson_id ?? ""}
+        targetText={question.prompt}
+      />
 
       <div className="mt-4 flex justify-center">
         <Button type="button" variant="ghost" onClick={() => setIndex((i) => i + 1)}>

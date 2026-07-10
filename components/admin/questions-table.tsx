@@ -7,7 +7,14 @@ import { Pencil, Plus, Trash2, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { FormDialog } from "@/components/admin/form-dialog";
 import { QuestionForm } from "@/components/admin/question-form";
 import { ConfirmDialog } from "@/components/common/confirm-dialog";
@@ -18,7 +25,10 @@ export function QuestionsTable({
   questions,
   lessons,
 }: {
-  questions: (Question & { options: QuestionOption[]; lesson: Pick<Lesson, "id" | "title"> | null })[];
+  questions: (Question & {
+    options: QuestionOption[];
+    lesson: Pick<Lesson, "id" | "title"> | null;
+  })[];
   lessons: Pick<Lesson, "id" | "title">[];
 }) {
   const router = useRouter();
@@ -31,11 +41,32 @@ export function QuestionsTable({
     <div>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <div className="relative w-full max-w-xs">
-          <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-          <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Cari soal..." className="pl-9" />
+          <Search className="text-muted-foreground absolute top-1/2 left-3 size-4 -translate-y-1/2" />
+          <Input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Cari soal..."
+            className="pl-9"
+          />
         </div>
-        <FormDialog trigger={<Button><Plus className="size-4" />Tambah Soal</Button>} title="Tambah Soal Baru">
-          {(close) => <QuestionForm lessons={lessons} onSuccess={() => { close(); refresh(); }} />}
+        <FormDialog
+          trigger={
+            <Button>
+              <Plus className="size-4" />
+              Tambah Soal
+            </Button>
+          }
+          title="Tambah Soal Baru"
+        >
+          {(close) => (
+            <QuestionForm
+              lessons={lessons}
+              onSuccess={() => {
+                close();
+                refresh();
+              }}
+            />
+          )}
         </FormDialog>
       </div>
 
@@ -58,7 +89,9 @@ export function QuestionsTable({
                 </TableCell>
                 <TableCell className="max-w-xs truncate font-medium">{question.prompt}</TableCell>
                 <TableCell className="text-muted-foreground">
-                  {question.is_placement_question ? "Tes Penempatan" : question.lesson?.title ?? "-"}
+                  {question.is_placement_question
+                    ? "Tes Penempatan"
+                    : (question.lesson?.title ?? "-")}
                 </TableCell>
                 <TableCell className="text-muted-foreground">{question.difficulty}</TableCell>
                 <TableCell className="text-right">
@@ -72,13 +105,20 @@ export function QuestionsTable({
                       title="Edit Soal"
                     >
                       {(close) => (
-                        <QuestionForm question={question} lessons={lessons} onSuccess={() => { close(); refresh(); }} />
+                        <QuestionForm
+                          question={question}
+                          lessons={lessons}
+                          onSuccess={() => {
+                            close();
+                            refresh();
+                          }}
+                        />
                       )}
                     </FormDialog>
                     <ConfirmDialog
                       trigger={
                         <Button size="icon-sm" variant="ghost">
-                          <Trash2 className="size-4 text-destructive" />
+                          <Trash2 className="text-destructive size-4" />
                         </Button>
                       }
                       title="Hapus soal ini?"

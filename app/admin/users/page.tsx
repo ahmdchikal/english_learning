@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageContainer } from "@/components/common/page-container";
 import { PageHeader } from "@/components/common/page-header";
+import { Breadcrumbs } from "@/components/common/breadcrumbs";
 import { UsersTable } from "@/components/admin/users-table";
 import { getAllUsersForAdmin } from "@/lib/data/admin";
 import { getCurrentUser } from "@/lib/data/current-user";
@@ -16,7 +17,14 @@ export default async function AdminUsersPage() {
 
   return (
     <PageContainer>
-      <PageHeader title="Kelola Pengguna" description="Lihat statistik pengguna dan kelola peran administrator." />
+      <Breadcrumbs
+        items={[{ label: "Panel Admin", href: "/admin" }, { label: "Pengguna" }]}
+        homeHref="/admin"
+      />
+      <PageHeader
+        title="Kelola Pengguna"
+        description="Lihat statistik pengguna dan kelola peran administrator."
+      />
       <UsersTable users={users} currentUserId={currentUser?.id ?? ""} />
     </PageContainer>
   );

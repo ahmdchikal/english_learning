@@ -43,8 +43,18 @@ export default async function LessonPage({ params }: PageProps) {
   const detail = await getLessonDetail(lessonId);
   if (!detail) notFound();
 
-  const { lesson, unit, level, vocabulary, examples, questions, progress, unlocked, previousLessonId, nextLessonId } =
-    detail;
+  const {
+    lesson,
+    unit,
+    level,
+    vocabulary,
+    examples,
+    questions,
+    progress,
+    unlocked,
+    previousLessonId,
+    nextLessonId,
+  } = detail;
 
   if (!unlocked) {
     return (
@@ -56,10 +66,10 @@ export default async function LessonPage({ params }: PageProps) {
             { label: unit.title, href: `/learn/${level.slug}/${unit.slug}` },
           ]}
         />
-        <div className="flex flex-col items-center gap-4 rounded-2xl border border-dashed bg-muted/30 px-6 py-16 text-center">
-          <Lock className="size-10 text-muted-foreground" />
+        <div className="bg-muted/30 flex flex-col items-center gap-4 rounded-2xl border border-dashed px-6 py-16 text-center">
+          <Lock className="text-muted-foreground size-10" />
           <h1 className="text-xl font-semibold">Pelajaran ini masih terkunci</h1>
-          <p className="max-w-sm text-sm text-muted-foreground">
+          <p className="text-muted-foreground max-w-sm text-sm">
             Selesaikan pelajaran sebelumnya terlebih dahulu untuk membuka pelajaran ini.
           </p>
           <LinkButton href={`/learn/${level.slug}/${unit.slug}`}>Kembali ke Unit</LinkButton>
@@ -84,10 +94,10 @@ export default async function LessonPage({ params }: PageProps) {
         ]}
       />
 
-      <div className="mb-6 rounded-2xl border bg-card p-5 shadow-sm sm:p-6">
+      <div className="bg-card mb-6 rounded-2xl border p-5 shadow-sm sm:p-6">
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">{lesson.title}</h1>
-        <p className="mt-1 text-muted-foreground">{lesson.description}</p>
-        <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+        <p className="text-muted-foreground mt-1">{lesson.description}</p>
+        <div className="text-muted-foreground mt-3 flex flex-wrap items-center gap-3 text-sm">
           <span className="flex items-center gap-1">
             <Clock className="size-4" />
             {lesson.estimated_minutes} menit
@@ -105,7 +115,9 @@ export default async function LessonPage({ params }: PageProps) {
 
         {lesson.learning_objectives.length > 0 && (
           <div className="mt-4 rounded-xl bg-indigo-50 p-4 dark:bg-indigo-500/10">
-            <p className="text-sm font-semibold text-indigo-700 dark:text-indigo-300">Tujuan Pembelajaran</p>
+            <p className="text-sm font-semibold text-indigo-700 dark:text-indigo-300">
+              Tujuan Pembelajaran
+            </p>
             <ul className="mt-2 list-inside list-disc space-y-1 text-sm text-indigo-900 dark:text-indigo-200">
               {lesson.learning_objectives.map((objective, index) => (
                 <li key={index}>{objective}</li>
@@ -116,9 +128,11 @@ export default async function LessonPage({ params }: PageProps) {
       </div>
 
       {lesson.explanation && (
-        <section className="mb-6 space-y-3 rounded-2xl border bg-card p-5 shadow-sm sm:p-6">
+        <section className="bg-card mb-6 space-y-3 rounded-2xl border p-5 shadow-sm sm:p-6">
           <h2 className="text-lg font-semibold">Penjelasan</h2>
-          <div className="space-y-3 text-sm text-muted-foreground">{renderParagraphs(lesson.explanation)}</div>
+          <div className="text-muted-foreground space-y-3 text-sm">
+            {renderParagraphs(lesson.explanation)}
+          </div>
         </section>
       )}
 
@@ -145,16 +159,20 @@ export default async function LessonPage({ params }: PageProps) {
       )}
 
       {lesson.grammar_notes && (
-        <section className="mb-6 rounded-2xl border bg-card p-5 shadow-sm sm:p-6">
+        <section className="bg-card mb-6 rounded-2xl border p-5 shadow-sm sm:p-6">
           <h2 className="text-lg font-semibold">Catatan Tata Bahasa</h2>
-          <p className="mt-2 text-sm text-muted-foreground">{lesson.grammar_notes}</p>
+          <p className="text-muted-foreground mt-2 text-sm">{lesson.grammar_notes}</p>
         </section>
       )}
 
       {lesson.common_mistakes && (
         <section className="mb-6 rounded-2xl border border-amber-200 bg-amber-50 p-5 shadow-sm sm:p-6 dark:border-amber-500/20 dark:bg-amber-500/10">
-          <h2 className="text-lg font-semibold text-amber-800 dark:text-amber-300">Kesalahan Umum</h2>
-          <p className="mt-2 text-sm text-amber-900 dark:text-amber-200">{lesson.common_mistakes}</p>
+          <h2 className="text-lg font-semibold text-amber-800 dark:text-amber-300">
+            Kesalahan Umum
+          </h2>
+          <p className="mt-2 text-sm text-amber-900 dark:text-amber-200">
+            {lesson.common_mistakes}
+          </p>
         </section>
       )}
 

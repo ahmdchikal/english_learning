@@ -41,7 +41,7 @@ export default async function DashboardPage() {
     <PageContainer>
       <div className="mb-6">
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Halo, {firstName}! 👋</h1>
-        <p className="mt-1 text-muted-foreground">
+        <p className="text-muted-foreground mt-1">
           {data.activeLevel
             ? `Level aktif: ${data.activeLevel.title} (${data.activeLevel.cefr_code})`
             : "Mari mulai perjalanan belajar Bahasa Inggris Anda."}
@@ -49,19 +49,39 @@ export default async function DashboardPage() {
       </div>
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <StatCard icon={Sparkles} label="Total XP" value={formatXp(profile?.total_xp ?? 0)} accent="indigo" />
-        <StatCard icon={Flame} label="Streak Harian" value={`${profile?.current_streak ?? 0} hari`} accent="orange" />
-        <StatCard icon={Target} label="Target Harian" value={`${profile?.daily_goal_minutes ?? 15} menit`} accent="emerald" />
-        <StatCard icon={Trophy} label="Pelajaran Selesai" value={data.totalLessonsCompleted} accent="rose" />
+        <StatCard
+          icon={Sparkles}
+          label="Total XP"
+          value={formatXp(profile?.total_xp ?? 0)}
+          accent="indigo"
+        />
+        <StatCard
+          icon={Flame}
+          label="Streak Harian"
+          value={`${profile?.current_streak ?? 0} hari`}
+          accent="orange"
+        />
+        <StatCard
+          icon={Target}
+          label="Target Harian"
+          value={`${profile?.daily_goal_minutes ?? 15} menit`}
+          accent="emerald"
+        />
+        <StatCard
+          icon={Trophy}
+          label="Pelajaran Selesai"
+          value={data.totalLessonsCompleted}
+          accent="rose"
+        />
       </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-3">
-        <div className="lg:col-span-2 space-y-6">
+        <div className="space-y-6 lg:col-span-2">
           {data.activeLevel && (
-            <div className="rounded-2xl border bg-card p-5 shadow-sm sm:p-6">
+            <div className="bg-card rounded-2xl border p-5 shadow-sm sm:p-6">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <h2 className="font-semibold">Progres Level {data.activeLevel.cefr_code}</h2>
-                <span className="text-sm font-medium text-muted-foreground">
+                <span className="text-muted-foreground text-sm font-medium">
                   {data.levelProgressPercent}%
                 </span>
               </div>
@@ -70,7 +90,7 @@ export default async function DashboardPage() {
                 className="mt-3"
                 indicatorClassName="bg-emerald-500"
               />
-              <p className="mt-2 text-sm text-muted-foreground">
+              <p className="text-muted-foreground mt-2 text-sm">
                 {data.incompleteLessonsCount > 0
                   ? `${data.incompleteLessonsCount} pelajaran belum diselesaikan pada level ini.`
                   : "Anda telah menyelesaikan semua pelajaran pada level ini!"}
@@ -80,7 +100,7 @@ export default async function DashboardPage() {
 
           {data.nextLesson ? (
             <div className="rounded-2xl border bg-gradient-to-br from-indigo-600 to-indigo-700 p-5 text-white shadow-sm sm:p-6">
-              <p className="text-xs font-semibold uppercase tracking-wide text-indigo-200">
+              <p className="text-xs font-semibold tracking-wide text-indigo-200 uppercase">
                 Lanjutkan Belajar
               </p>
               <h2 className="mt-1 text-xl font-bold">{data.nextLesson.title}</h2>
@@ -108,9 +128,11 @@ export default async function DashboardPage() {
             />
           )}
 
-          <div className="rounded-2xl border bg-card p-5 shadow-sm sm:p-6">
+          <div className="bg-card rounded-2xl border p-5 shadow-sm sm:p-6">
             <h2 className="font-semibold">XP 7 Hari Terakhir</h2>
-            <p className="text-sm text-muted-foreground">Total {formatXp(weeklyXp)} XP minggu ini</p>
+            <p className="text-muted-foreground text-sm">
+              Total {formatXp(weeklyXp)} XP minggu ini
+            </p>
             <div className="mt-3">
               <WeeklyXpChart activities={data.weeklyActivities} />
             </div>
@@ -118,7 +140,7 @@ export default async function DashboardPage() {
         </div>
 
         <div className="space-y-6">
-          <div className="rounded-2xl border bg-card p-5 shadow-sm">
+          <div className="bg-card rounded-2xl border p-5 shadow-sm">
             <h2 className="font-semibold">Lencana Terbaru</h2>
             {data.latestBadge ? (
               <div className="mt-3 flex items-center gap-3 rounded-xl bg-amber-50 p-3 dark:bg-amber-500/10">
@@ -127,11 +149,13 @@ export default async function DashboardPage() {
                 </span>
                 <div>
                   <p className="text-sm font-semibold">{data.latestBadge.achievement.name}</p>
-                  <p className="text-xs text-muted-foreground">{data.latestBadge.achievement.description}</p>
+                  <p className="text-muted-foreground text-xs">
+                    {data.latestBadge.achievement.description}
+                  </p>
                 </div>
               </div>
             ) : (
-              <p className="mt-3 text-sm text-muted-foreground">
+              <p className="text-muted-foreground mt-3 text-sm">
                 Belum ada lencana. Selesaikan pelajaran pertama Anda untuk mendapatkan lencana!
               </p>
             )}
@@ -141,7 +165,7 @@ export default async function DashboardPage() {
             </LinkButton>
           </div>
 
-          <div className="rounded-2xl border bg-card p-5 shadow-sm">
+          <div className="bg-card rounded-2xl border p-5 shadow-sm">
             <h2 className="font-semibold">Statistik Minggu Ini</h2>
             <dl className="mt-3 space-y-2 text-sm">
               <div className="flex justify-between">
@@ -159,7 +183,7 @@ export default async function DashboardPage() {
             </dl>
           </div>
 
-          <div className="rounded-2xl border bg-card p-5 shadow-sm">
+          <div className="bg-card rounded-2xl border p-5 shadow-sm">
             <h2 className="font-semibold">Kalender Aktivitas</h2>
             <div className="mt-3">
               <ActivityCalendar activities={data.weeklyActivities} days={28} />

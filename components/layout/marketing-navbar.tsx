@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, GraduationCap } from "lucide-react";
 import { LinkButton } from "@/components/ui/link-button";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/constants/site";
 import type { CurrentUser } from "@/lib/data/current-user";
@@ -19,9 +20,9 @@ export function MarketingNavbar({ user }: { user: CurrentUser | null }) {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur supports-backdrop-filter:bg-background/60">
+    <header className="bg-background/80 supports-backdrop-filter:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" className="flex items-center gap-2 font-bold text-lg">
+        <Link href="/" className="flex items-center gap-2 text-lg font-bold">
           <span className="flex size-8 items-center justify-center rounded-xl bg-indigo-600 text-white">
             <GraduationCap className="size-5" />
           </span>
@@ -34,7 +35,7 @@ export function MarketingNavbar({ user }: { user: CurrentUser | null }) {
               key={link.href}
               href={link.href}
               className={cn(
-                "text-sm font-medium text-muted-foreground transition-colors hover:text-foreground",
+                "text-muted-foreground hover:text-foreground text-sm font-medium transition-colors",
                 pathname === link.href && "text-foreground"
               )}
             >
@@ -44,6 +45,7 @@ export function MarketingNavbar({ user }: { user: CurrentUser | null }) {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
+          <ThemeToggle />
           {user ? (
             <LinkButton href="/dashboard">Ke Dashboard</LinkButton>
           ) : (
@@ -56,24 +58,27 @@ export function MarketingNavbar({ user }: { user: CurrentUser | null }) {
           )}
         </div>
 
-        <button
-          type="button"
-          aria-label={open ? "Tutup menu" : "Buka menu"}
-          className="flex size-10 items-center justify-center rounded-lg text-foreground md:hidden"
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
-        </button>
+        <div className="flex items-center gap-1 md:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            aria-label={open ? "Tutup menu" : "Buka menu"}
+            className="text-foreground flex size-10 items-center justify-center rounded-lg"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          </button>
+        </div>
       </div>
 
       {open && (
-        <div className="border-t bg-background px-4 py-4 md:hidden">
+        <div className="bg-background border-t px-4 py-4 md:hidden">
           <nav className="flex flex-col gap-3">
             {LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-muted"
+                className="text-muted-foreground hover:bg-muted rounded-lg px-3 py-2 text-sm font-medium"
                 onClick={() => setOpen(false)}
               >
                 {link.label}

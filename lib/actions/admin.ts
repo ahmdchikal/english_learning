@@ -150,7 +150,10 @@ export async function deleteLessonAction(id: string): Promise<ActionResult> {
 // ---------------------------------------------------------------------------
 // Vocabulary
 // ---------------------------------------------------------------------------
-export async function upsertVocabularyAction(id: string | null, input: unknown): Promise<ActionResult> {
+export async function upsertVocabularyAction(
+  id: string | null,
+  input: unknown
+): Promise<ActionResult> {
   const parsed = vocabularyFormSchema.safeParse(input);
   if (!parsed.success) {
     return { success: false, message: parsed.error.issues[0]?.message ?? "Data tidak valid." };
@@ -185,7 +188,10 @@ export async function deleteVocabularyAction(id: string): Promise<ActionResult> 
 // ---------------------------------------------------------------------------
 // Lesson examples
 // ---------------------------------------------------------------------------
-export async function upsertLessonExampleAction(id: string | null, input: unknown): Promise<ActionResult> {
+export async function upsertLessonExampleAction(
+  id: string | null,
+  input: unknown
+): Promise<ActionResult> {
   const parsed = lessonExampleFormSchema.safeParse(input);
   if (!parsed.success) {
     return { success: false, message: parsed.error.issues[0]?.message ?? "Data tidak valid." };
@@ -220,7 +226,10 @@ export async function deleteLessonExampleAction(id: string): Promise<ActionResul
 // ---------------------------------------------------------------------------
 // Questions + options (saved together in one transaction-like sequence)
 // ---------------------------------------------------------------------------
-export async function upsertQuestionAction(id: string | null, input: unknown): Promise<ActionResult> {
+export async function upsertQuestionAction(
+  id: string | null,
+  input: unknown
+): Promise<ActionResult> {
   const parsed = questionFormSchema.safeParse(input);
   if (!parsed.success) {
     return { success: false, message: parsed.error.issues[0]?.message ?? "Data tidak valid." };
@@ -294,13 +303,19 @@ export async function togglePublishAction(
     const { error } = await supabase.from(table).update({ is_published: isPublished }).eq("id", id);
     if (error) throw error;
     revalidateAdminPaths();
-    return { success: true, message: isPublished ? "Konten dipublikasikan." : "Konten dijadikan draf." };
+    return {
+      success: true,
+      message: isPublished ? "Konten dipublikasikan." : "Konten dijadikan draf.",
+    };
   } catch (error) {
     return { success: false, message: toFriendlyErrorMessage(error) };
   }
 }
 
-export async function updateUserRoleAction(userId: string, role: "user" | "admin"): Promise<ActionResult> {
+export async function updateUserRoleAction(
+  userId: string,
+  role: "user" | "admin"
+): Promise<ActionResult> {
   try {
     const supabase = await requireAdminClient();
     const { error } = await supabase.rpc("admin_set_user_role", {

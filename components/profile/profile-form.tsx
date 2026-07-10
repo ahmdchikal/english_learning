@@ -10,7 +10,13 @@ import { Label } from "@/components/ui/label";
 import { updateProfileSchema, type UpdateProfileValues } from "@/lib/validations/profile";
 import { updateProfileAction } from "@/lib/actions/profile";
 
-export function ProfileForm({ fullName, dailyGoalMinutes }: { fullName: string; dailyGoalMinutes: number }) {
+export function ProfileForm({
+  fullName,
+  dailyGoalMinutes,
+}: {
+  fullName: string;
+  dailyGoalMinutes: number;
+}) {
   const {
     register,
     handleSubmit,
@@ -34,7 +40,7 @@ export function ProfileForm({ fullName, dailyGoalMinutes }: { fullName: string; 
       <div className="space-y-2">
         <Label htmlFor="fullName">Nama Lengkap</Label>
         <Input id="fullName" aria-invalid={!!errors.fullName} {...register("fullName")} />
-        {errors.fullName && <p className="text-sm text-destructive">{errors.fullName.message}</p>}
+        {errors.fullName && <p className="text-destructive text-sm">{errors.fullName.message}</p>}
       </div>
 
       <div className="space-y-2">
@@ -48,7 +54,7 @@ export function ProfileForm({ fullName, dailyGoalMinutes }: { fullName: string; 
           {...register("dailyGoalMinutes", { valueAsNumber: true })}
         />
         {errors.dailyGoalMinutes && (
-          <p className="text-sm text-destructive">{errors.dailyGoalMinutes.message}</p>
+          <p className="text-destructive text-sm">{errors.dailyGoalMinutes.message}</p>
         )}
       </div>
 

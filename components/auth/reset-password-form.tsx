@@ -48,7 +48,7 @@ export function ResetPasswordForm() {
           {...register("password")}
         />
         <PasswordStrengthMeter password={password ?? ""} />
-        {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
+        {errors.password && <p className="text-destructive text-sm">{errors.password.message}</p>}
       </div>
 
       <div className="space-y-2">
@@ -61,7 +61,7 @@ export function ResetPasswordForm() {
           {...register("confirmPassword")}
         />
         {errors.confirmPassword && (
-          <p className="text-sm text-destructive">{errors.confirmPassword.message}</p>
+          <p className="text-destructive text-sm">{errors.confirmPassword.message}</p>
         )}
       </div>
 

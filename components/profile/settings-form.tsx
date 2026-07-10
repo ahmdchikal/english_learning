@@ -9,7 +9,13 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Slider } from "@/components/ui/slider";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { updateSettingsSchema, type UpdateSettingsValues } from "@/lib/validations/profile";
 import { updateSettingsAction } from "@/lib/actions/profile";
 import type { ThemePreference } from "@/types/database";
@@ -51,7 +57,7 @@ export function SettingsForm({
       <div className="flex items-center justify-between">
         <div>
           <Label htmlFor="soundEnabled">Suara Aplikasi</Label>
-          <p className="text-sm text-muted-foreground">Aktifkan efek suara dan audio pengucapan.</p>
+          <p className="text-muted-foreground text-sm">Aktifkan efek suara dan audio pengucapan.</p>
         </div>
         <Switch
           id="soundEnabled"
@@ -66,7 +72,9 @@ export function SettingsForm({
             <Volume2 className="size-4" />
             Kecepatan Suara Text-to-Speech
           </Label>
-          <span className="text-sm text-muted-foreground">{(values.ttsSpeed ?? ttsSpeed).toFixed(1)}x</span>
+          <span className="text-muted-foreground text-sm">
+            {(values.ttsSpeed ?? ttsSpeed).toFixed(1)}x
+          </span>
         </div>
         <Slider
           id="ttsSpeed"
@@ -81,7 +89,10 @@ export function SettingsForm({
 
       <div className="space-y-2">
         <Label htmlFor="theme">Tema Tampilan</Label>
-        <Select value={values.theme ?? theme} onValueChange={(v) => setValue("theme", v as ThemePreference)}>
+        <Select
+          value={values.theme ?? theme}
+          onValueChange={(v) => setValue("theme", v as ThemePreference)}
+        >
           <SelectTrigger id="theme" className="w-full">
             <SelectValue />
           </SelectTrigger>

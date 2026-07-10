@@ -15,7 +15,10 @@ const PROTECTED_PREFIXES = [
   "/admin",
 ];
 
-const AUTH_PREFIXES = ["/login", "/register", "/forgot-password", "/reset-password"];
+// "/reset-password" is intentionally excluded: reaching it always requires a
+// valid recovery session (set up via /auth/callback), so an authenticated
+// user must still be able to load it to actually set their new password.
+const AUTH_PREFIXES = ["/login", "/register", "/forgot-password"];
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
