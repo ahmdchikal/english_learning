@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Android SDK + TWA build tooling/output — regenerated on demand from
+# `docs/android-app.md`, never committed (contains a large local Android
+# SDK install and a generated signing keystore).
+/.android-sdk
+/android-twa
