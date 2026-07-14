@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
-import { Clock, Sparkles, Lock, ChevronLeft, ChevronRight, BookOpen, Mic } from "lucide-react";
+import {
+  Clock,
+  Sparkles,
+  Lock,
+  ChevronLeft,
+  ChevronRight,
+  BookOpen,
+  Mic,
+  PartyPopper,
+} from "lucide-react";
 import { PageContainer } from "@/components/common/page-container";
 import { Breadcrumbs } from "@/components/common/breadcrumbs";
 import { LinkButton } from "@/components/ui/link-button";
@@ -207,6 +216,24 @@ export default async function LessonPage({ params }: PageProps) {
           Tandai Selesai &amp; Kerjakan Kuis
         </LinkButton>
       </section>
+
+      {!nextLessonId && (
+        <section className="mb-6 flex flex-col items-center gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 p-5 text-center shadow-sm sm:p-6 dark:border-emerald-500/20 dark:bg-emerald-500/10">
+          <PartyPopper className="size-8 text-emerald-600 dark:text-emerald-400" />
+          <div>
+            <p className="font-semibold text-emerald-800 dark:text-emerald-300">
+              {progress?.status === "completed"
+                ? "Ini adalah pelajaran terakhir yang tersedia di level ini!"
+                : "Anda telah mencapai pelajaran terakhir yang tersedia di level ini."}
+            </p>
+            <p className="mt-1 text-sm text-emerald-900 dark:text-emerald-200">
+              Selesaikan kuis di atas jika belum, lalu kembali ke halaman Belajar untuk memeriksa
+              apakah level selanjutnya sudah terbuka, atau jelajahi level lain.
+            </p>
+          </div>
+          <LinkButton href="/learn">Kembali ke Halaman Belajar</LinkButton>
+        </section>
+      )}
 
       <div className="flex items-center justify-between border-t pt-4">
         {previousLessonId ? (

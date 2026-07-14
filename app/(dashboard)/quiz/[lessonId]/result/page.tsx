@@ -65,6 +65,12 @@ export default async function QuizResultPage({ params }: PageProps) {
         <p className="text-muted-foreground mt-1">
           {getMotivationalMessage(attempt.score, attempt.passed)}
         </p>
+        {attempt.passed && !nextLessonId && (
+          <p className="mt-2 text-sm font-medium text-emerald-700 dark:text-emerald-400">
+            🎉 Ini adalah pelajaran terakhir yang tersedia di level ini. Cek halaman Belajar untuk
+            melihat level selanjutnya.
+          </p>
+        )}
 
         <div className="mt-6 grid grid-cols-3 gap-3 text-center">
           <div className="rounded-xl bg-emerald-50 p-3 dark:bg-emerald-500/10">
@@ -99,6 +105,11 @@ export default async function QuizResultPage({ params }: PageProps) {
           {attempt.passed && nextLessonId ? (
             <LinkButton href={`/lesson/${nextLessonId}`}>
               Lanjut ke Pelajaran Berikutnya
+              <ArrowRight className="size-4" />
+            </LinkButton>
+          ) : attempt.passed ? (
+            <LinkButton href="/learn">
+              Kembali ke Halaman Belajar
               <ArrowRight className="size-4" />
             </LinkButton>
           ) : (

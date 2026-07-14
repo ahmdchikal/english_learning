@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { getAdjacentLessons } from "@/lib/data/lesson-navigation";
 import type {
   Lesson,
   LessonExample,
@@ -43,7 +44,7 @@ export async function getLessonDetail(lessonId: string): Promise<LessonDetail | 
   const unit = lesson.unit;
   const level = unit.level;
 
-  const [vocabRes, examplesRes, questionsRes, siblingLessonsRes, userRes] = await Promise.all([
+  const [vocabRes, examplesRes, questionsRes, adjacentLessons, userRes] = await Promise.all([
     supabase
       .from("vocabulary")
       .select("*")
@@ -59,12 +60,7 @@ export async function getLessonDetail(lessonId: string): Promise<LessonDetail | 
       .select("*")
       .eq("lesson_id", lessonId)
       .order("order_index", { ascending: true }),
-    supabase
-      .from("lessons")
-      .select("id, order_index")
-      .eq("unit_id", unit.id)
-      .eq("is_published", true)
-      .order("order_index", { ascending: true }),
+    getAdjacentLessons(supabase, level.id, lessonId),
     supabase.auth.getUser(),
   ]);
 
@@ -90,13 +86,7 @@ export async function getLessonDetail(lessonId: string): Promise<LessonDetail | 
     options: (optionsByQuestion.get(q.id) ?? []).sort((a, b) => a.order_index - b.order_index),
   }));
 
-  const siblingLessons = (siblingLessonsRes.data as Pick<Lesson, "id" | "order_index">[]) ?? [];
-  const currentIndex = siblingLessons.findIndex((l) => l.id === lessonId);
-  const previousLessonId = currentIndex > 0 ? siblingLessons[currentIndex - 1].id : null;
-  const nextLessonId =
-    currentIndex >= 0 && currentIndex < siblingLessons.length - 1
-      ? siblingLessons[currentIndex + 1].id
-      : null;
+  const { previousLessonId, nextLessonId } = adjacentLessons;
 
   let progress: UserLessonProgress | null = null;
   let unlocked = false;

@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { getAdjacentLessons } from "@/lib/data/lesson-navigation";
 import type { Lesson, QuizAnswer, QuizAttempt, Question, Unit, Level } from "@/types/database";
 
 export interface QuizResultReviewItem extends QuizAnswer {
@@ -47,17 +48,7 @@ export async function getLatestQuizResult(
 
   const incorrectAnswers = (answersData as QuizResultReviewItem[]) ?? [];
 
-  const { data: siblingLessons } = await supabase
-    .from("lessons")
-    .select("id, order_index")
-    .eq("unit_id", lesson.unit.id)
-    .eq("is_published", true)
-    .order("order_index", { ascending: true });
-
-  const siblings = (siblingLessons as Pick<Lesson, "id" | "order_index">[]) ?? [];
-  const currentIndex = siblings.findIndex((l) => l.id === lessonId);
-  const nextLessonId =
-    currentIndex >= 0 && currentIndex < siblings.length - 1 ? siblings[currentIndex + 1].id : null;
+  const { nextLessonId } = await getAdjacentLessons(supabase, lesson.unit.level.id, lessonId);
 
   return {
     attempt,
