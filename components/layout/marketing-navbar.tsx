@@ -13,6 +13,7 @@ import type { CurrentUser } from "@/lib/data/current-user";
 const LINKS = [
   { href: "/levels", label: "Level" },
   { href: "/about", label: "Tentang" },
+  { href: "/download-app", label: "Aplikasi Android" },
 ];
 
 export function MarketingNavbar({ user }: { user: CurrentUser | null }) {

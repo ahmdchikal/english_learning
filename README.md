@@ -24,6 +24,7 @@ Platform belajar Bahasa Inggris untuk pengguna Indonesia — dari pemula absolut
 - **Panel Admin** — CRUD untuk level, unit, pelajaran, kosakata, contoh kalimat, soal (+ pilihan jawaban), publish/unpublish, draf, pencarian/filter, dan manajemen peran pengguna. Dilindungi oleh peran `admin` di database (RLS) dan pemeriksaan di server.
 - **Desain Responsif** — Mobile-first, bottom navigation di perangkat mobile, sidebar di desktop, mode gelap, skeleton loading, toast notification, dialog konfirmasi untuk aksi penting, dan breadcrumb di halaman pelajaran/admin.
 - **SEO** — Metadata per halaman, Open Graph & Twitter card, `sitemap.xml`, `robots.txt`, web app manifest, dan canonical URL.
+- **Aplikasi Android** — Dapat dipasang langsung dari Chrome ("Tambahkan ke Layar Utama") sebagai Progressive Web App, atau diunduh sebagai berkas `.apk` mandiri di halaman `/download-app`. Lihat [`docs/android-app.md`](docs/android-app.md) untuk detail dan cara membangun ulang APK-nya.
 
 ## Teknologi
 
