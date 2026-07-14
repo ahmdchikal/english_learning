@@ -3,6 +3,8 @@ import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { OfflineBanner } from "@/components/common/offline-banner";
+import { ServiceWorkerRegister } from "@/components/common/service-worker-register";
+import { InstallAppPrompt } from "@/components/common/install-app-prompt";
 import { siteConfig } from "@/lib/constants/site";
 import "./globals.css";
 
@@ -25,8 +27,18 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   applicationName: siteConfig.name,
   manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: siteConfig.name,
+  },
   icons: {
-    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
     shortcut: "/favicon.ico",
   },
   openGraph: {
@@ -72,7 +84,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <OfflineBanner />
+          <ServiceWorkerRegister />
           {children}
+          <InstallAppPrompt />
           <Toaster position="top-center" richColors closeButton />
         </ThemeProvider>
       </body>

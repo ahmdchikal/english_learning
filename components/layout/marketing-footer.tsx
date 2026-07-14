@@ -9,6 +9,7 @@ const FOOTER_LINKS: { title: string; links: { href: string; label: string }[] }[
       { href: "/levels", label: "Level Belajar" },
       { href: "/placement-test", label: "Tes Penempatan" },
       { href: "/register", label: "Mulai Belajar" },
+      { href: "/download-app", label: "Aplikasi Android" },
     ],
   },
   {
